@@ -32,6 +32,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import emailer
+import exams
 import notify
 
 REPO_URL = os.environ.get("TDS_REPO", "https://github.com/sanand0/tools-in-data-science-public.git")
@@ -310,52 +311,72 @@ def snapshot_page(url, follow_assets=False):
     return 200, "\n".join(parts)
 
 
-def check_pages(state, schedule, term):
+def check_pages(state):
+    """The live course site (plus any TDS_EXTRA_URLS): text snapshot + diff."""
     pages = state.setdefault("pages", {})
     items, files, errors = [], {}, []
-
-    targets = {f"{SITE}/{term}/": False} if term else {}
-    for u in EXTRA_URLS:
-        targets[u] = u.startswith(EXAM)
-    links = {row["link"] for row in schedule.values() if row["link"].startswith(EXAM)}
-    for u in links:
-        targets[u] = True
-
-    # Probe exam slugs for assessments that don't have a link yet → early release detection
-    probe = {}
-    if term:
-        fake_status, fake = fetch(f"{EXAM}/tds-{term}-zz-does-not-exist")
-        fake_sig = sha(html_to_text(fake)) if fake_status == 200 else None
-        for aid, row in schedule.items():
-            if row["link"] or not re.fullmatch(r"(GA\d+|P\d+|ROE)", aid):
-                continue
-            u = f"{EXAM}/tds-{term}-{aid.lower()}"
-            st, body = fetch(u)
-            live = st == 200 and (fake_sig is None or sha(html_to_text(body)) != fake_sig)
-            probe[u] = {"aid": aid, "live": live}
-
-    for url, deep in targets.items():
-        status, text = snapshot_page(url, follow_assets=deep)
-        prev = pages.get(url)
+    term = state.get("term", "")
+    targets = ([f"{SITE}/{term}/"] if term else []) + EXTRA_URLS
+    for url in targets:
+        status, text = snapshot_page(url)
         if status != 200:
             errors.append(f"{url} → HTTP {status or 'unreachable'}")
             continue
-        h = sha(text)
+        prev, h = pages.get(url), sha(text)
         if prev and prev["hash"] != h:
+            items.append(f"✏️ Course page changed: {url}")
             d = short_diff(prev.get("text", ""), text)
-            label = "Exam page" if deep else "Course page"
-            items.append(f"✏️ {label} changed: {url}")
             if d:
                 files[url] = d
         pages[url] = {"hash": h, "text": text[:200_000], "seen": datetime.now(IST).isoformat(timespec="minutes")}
-
-    probes = state.setdefault("probes", {})
-    for u, p in probe.items():
-        if p["live"] and not probes.get(u):
-            items.append(f"👀 {p['aid']} appears to be live on the exam portal already (not yet linked on the course page): {u}")
-        probes[u] = p["live"]
-
     return items, files, errors
+
+
+def exam_slugs(schedule, term):
+    """{slug: (label, linked)} for linked exams plus guessed slugs for assessments not linked yet."""
+    out = {}
+    for aid, row in schedule.items():
+        if row["link"].startswith(EXAM):
+            out[row["link"].rstrip("/").rsplit("/", 1)[-1]] = (aid, True)
+        elif term and re.fullmatch(r"(GA\d+|P\d+|ROE)", aid):
+            out[f"tds-{term}-{aid.lower()}"] = (aid, False)
+    return out
+
+
+def check_exams(state, schedule, term):
+    """Read every exam's public info + question files; report new/removed/changed questions and dates."""
+    baseline = "exams" not in state
+    known = state.setdefault("exams", {})
+    items, errors = [], []
+    now = datetime.now(IST).isoformat(timespec="seconds")
+    for slug, (label, linked) in exam_slugs(schedule, term).items():
+        st, info_js = fetch(f"{EXAM}/exam-{slug}.info.js")
+        if st == 404:
+            continue  # not released yet
+        if st != 200:
+            errors.append(f"{EXAM}/exam-{slug}.info.js → HTTP {st or 'unreachable'}")
+            continue
+        st, q_js = fetch(f"{EXAM}/exam-{slug}.js")
+        if st != 200:
+            errors.append(f"{EXAM}/exam-{slug}.js → HTTP {st or 'unreachable'}")
+            continue
+        new = {"label": label, "info": exams.parse_info(info_js), "questions": exams.parse_questions(q_js)}
+        for q in new["questions"]:  # a date that is just the assessment's own deadline isn't a separate one
+            if q["closes_at"] and new["info"]["end"] and q["closes_at"][:16] == new["info"]["end"][:16]:
+                q["own_deadline"] = False
+        old = known.get(slug)
+        first_seen = (old or {}).get("first_seen", {})
+        for q in new["questions"]:
+            first_seen.setdefault(q["id"], None if baseline or not old else now)
+        new["first_seen"] = first_seen
+        if not baseline:
+            if old is None and not linked:
+                items.append(f"👀 {label} is already live on the exam portal ({len(new['questions'])} question{'' if len(new['questions']) == 1 else 's'}), "
+                             f"before the course page links it: {EXAM}/{slug}")
+            elif old is not None:
+                items += exams.diff(label, old, new)
+        known[slug] = new
+    return items, errors
 
 
 # --------------------------------------------------------------------------- optional LLM summary
@@ -428,6 +449,13 @@ def write_site_data(state, repo, report_items):
         "alerts_api": os.environ.get("ALERTS_API", "").rstrip("/"),
         "schedule": rows,
         "changes": state.get("history", [])[:60],
+        "exams": [
+            {"slug": slug, "label": e["label"], "url": f"{EXAM}/{slug}", **e["info"],
+             "questions": [{**{k: q[k] for k in ("id", "title", "opens_at", "closes_at", "own_deadline", "dates")},
+                            "n": i, "first_seen": e.get("first_seen", {}).get(q["id"])}
+                           for i, q in enumerate(e["questions"], 1)]}
+            for slug, e in state.get("exams", {}).items()
+        ],
     }
     SITE_DIR.mkdir(exist_ok=True)
     (SITE_DIR / "data.json").write_text(json.dumps(data, indent=1, ensure_ascii=False))
@@ -448,7 +476,11 @@ def main():
     state = load("state.json", {})
     first_run = not state
     repo = check_repo(state, since=args.since)
-    page_items, page_files, errors = ([], {}, []) if args.no_web else check_pages(state, repo["schedule"], repo["term"])
+    page_items, page_files, errors = [], {}, []
+    if not args.no_web:
+        page_items, page_files, errors = check_pages(state)
+        exam_items, exam_errors = check_exams(state, repo["schedule"], repo["term"])
+        page_items, errors = exam_items + page_items, errors + exam_errors
     if first_run:
         page_items, page_files = [], {}  # baseline only
 

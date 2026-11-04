@@ -105,6 +105,31 @@ details.done { margin-top: 28px; }
 details.done summary { cursor: pointer; font-weight: 700; color: var(--muted); }
 details.done .item { opacity: .7; }
 
+/* ---------- questions */
+.qwrap { grid-column: 1 / -1; margin-top: 10px; }
+.qwrap summary { cursor: pointer; font-size: 0.92rem; color: var(--muted); font-weight: 700; }
+.qwrap summary b { color: var(--ink); }
+.qlist { list-style: none; margin: 8px 0 0; padding: 0; }
+.q { display: grid; grid-template-columns: 2.2em 1fr auto; gap: 0 10px; padding: 7px 0; border-top: 1px dashed var(--line); font-size: 0.93rem; }
+.q .qn { font: 700 0.85rem/1.5 var(--display); font-stretch: 85%; color: var(--muted); }
+.q .qt { overflow-wrap: anywhere; }
+.q .qd { color: var(--muted); font-size: 0.85rem; grid-column: 2; }
+.q .qc { text-align: right; font: 750 0.95rem/1.4 var(--display); font-stretch: 75%; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.q.closed { opacity: .55; }
+.q.closed .qt { text-decoration: line-through; text-decoration-thickness: 1px; }
+.q.soon .qc { color: var(--soon); } .q.urgent .qc { color: var(--urgent); }
+.badge-new { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 1px 6px; border-radius: 5px; background: var(--open-soft); color: var(--open); margin-left: 6px; vertical-align: 1px; }
+.nextq { grid-column: 1 / -1; font-size: 0.92rem; margin-top: 6px; }
+.nextq b { font-variant-numeric: tabular-nums; }
+.qdead { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.qdead li { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 12px 0 12px 14px; border-bottom: 1px solid var(--line); position: relative; }
+.qdead li::before { content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 4px; border-radius: 2px; background: var(--open); }
+.qdead li.soon::before { background: var(--soon); } .qdead li.urgent::before { background: var(--urgent); }
+.qdead .t { font-weight: 700; } .qdead .t span { font: 750 0.95rem var(--display); color: var(--muted); margin-right: 6px; }
+.qdead .w { color: var(--muted); font-size: 0.9rem; grid-column: 1; }
+.qdead .c { grid-row: span 2; align-self: center; text-align: right; font: 800 1.35rem/1 var(--display); font-stretch: 68%; font-variant-numeric: tabular-nums; }
+.qdead li.soon .c { color: var(--soon); } .qdead li.urgent .c { color: var(--urgent); }
+
 /* ---------- alerts form */
 .signup { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
 .signup p { margin: 0 0 14px; }
@@ -155,6 +180,11 @@ footer p { margin: 4px 0; max-width: 70ch; }
 
   <div class="cols">
     <main>
+      <section aria-labelledby="h-qdead" id="qdead-wrap" hidden>
+        <h2 id="h-qdead">Question deadlines this week</h2>
+        <p class="sub">Some questions close before their assignment does. These are the ones closing in the next 7 days.</p>
+        <ul class="qdead" id="qdead"></ul>
+      </section>
       <section aria-labelledby="h-open">
         <h2 id="h-open">Open now</h2>
         <p class="sub">Submit before the countdown hits zero. Times are IST.</p>
@@ -172,7 +202,7 @@ footer p { margin: 4px 0; max-width: 70ch; }
     <aside>
       <section class="signup" id="signup" aria-labelledby="h-alerts" hidden>
         <h2 id="h-alerts">Get an email when something changes</h2>
-        <p class="sub" style="margin-top:6px">New assignment released, a deadline moved, a new exam link. Nothing else.</p>
+        <p class="sub" style="margin-top:6px">New assignment or question released, or a deadline moved. Nothing else.</p>
         <form id="form" novalidate>
           <label for="email" class="hp">Email address</label>
           <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@study.iitm.ac.in or any email" required>
@@ -185,7 +215,7 @@ footer p { margin: 4px 0; max-width: 70ch; }
 
       <section aria-labelledby="h-feed">
         <h2 id="h-feed">What changed</h2>
-        <p class="sub">Picked up from the course repo, the course site and the exam portal.</p>
+        <p class="sub">Picked up from the course repo, the course site and every question on the exam portal.</p>
         <ul class="feed" id="feed"></ul>
         <button class="btn" id="older" type="button" hidden>Show older changes</button>
       </section>
@@ -227,6 +257,63 @@ function countdown(ms) {
   return `${h}h ${String(m).padStart(2, "0")}m`;
 }
 
+const fmtWhen = (iso) => new Date(iso).toLocaleString("en-IN", { weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Asia/Kolkata" });
+const examFor = (id) => (DATA.exams || []).find((e) => e.label === id);
+
+function qStatus(q, examEnd, now) {
+  const close = q.closes_at ? Date.parse(q.closes_at) : (examEnd ? Date.parse(examEnd) : null);
+  const open = q.opens_at ? Date.parse(q.opens_at) : null;
+  if (close !== null && now > close) return ["closed", close];
+  if (open !== null && now < open) return ["notyet", close, open];
+  if (close !== null && close - now < D) return ["urgent", close];
+  if (close !== null && close - now < 3 * D) return ["soon", close];
+  return ["open", close];
+}
+
+function questionsHTML(r, now) {
+  const ex = examFor(r.id);
+  if (!ex || !ex.questions?.length) return "";
+  const isNew = (q) => q.first_seen && now - Date.parse(q.first_seen) < 4 * D;
+  const rows = ex.questions.map((q) => {
+    const [st, close, open] = qStatus(q, ex.end, now);
+    let right = "", detail = "";
+    if (st === "closed") { right = "Closed"; detail = q.own_deadline ? `Closed ${fmtWhen(q.closes_at)}` : ""; }
+    else if (st === "notyet") { right = `opens in ${countdown(open - now)}`; detail = `Opens ${fmtWhen(q.opens_at)}`; }
+    else { right = close ? countdown(close - now) : ""; detail = q.own_deadline ? `Own deadline: ${fmtWhen(q.closes_at)}` : ""; }
+    return `<li class="q ${st}"><span class="qn">Q${q.n}</span><span class="qt">${esc(q.title)}${isNew(q) ? '<span class="badge-new">New</span>' : ""}</span><span class="qc">${right}</span>${detail ? `<span class="qd">${detail}</span>` : ""}</li>`;
+  }).join("");
+  const fresh = ex.questions.filter(isNew).length;
+  const own = ex.questions.filter((q) => q.own_deadline).length;
+  const bits = [`<b>${ex.questions.length} question${ex.questions.length === 1 ? "" : "s"}</b> so far`];
+  if (fresh) bits.push(`${fresh} new`);
+  if (own) bits.push(`${own} with ${own === 1 ? "its" : "their"} own deadline`);
+  return `<details class="qwrap"${fresh ? " open" : ""}><summary>${bits.join(", ")}</summary><ul class="qlist">${rows}</ul></details>`;
+}
+
+function nextQuestionDeadline(r, now) {
+  const ex = examFor(r.id);
+  if (!ex) return "";
+  const due = r.due_at ? Date.parse(r.due_at) : Infinity;
+  const next = ex.questions.filter((q) => q.own_deadline && Date.parse(q.closes_at) > now && Date.parse(q.closes_at) < due)
+    .sort((a, b) => a.closes_at.localeCompare(b.closes_at))[0];
+  return next ? `<div class="nextq">Next question deadline: Q${next.n} ${esc(next.title)}, <b>${countdown(Date.parse(next.closes_at) - now)}</b> left</div>` : "";
+}
+
+function renderQuestionDeadlines(now) {
+  const list = [];
+  for (const ex of DATA.exams || []) for (const q of ex.questions || []) {
+    if (!q.own_deadline) continue;
+    const t = Date.parse(q.closes_at);
+    if (t > now && t - now < 7 * D) list.push([t, ex, q]);
+  }
+  list.sort((a, b) => a[0] - b[0]);
+  $("qdead-wrap").hidden = !list.length;
+  $("qdead").innerHTML = list.map(([t, ex, q]) => {
+    const cls = t - now < D ? "urgent" : t - now < 3 * D ? "soon" : "";
+    return `<li class="${cls}"><div class="t"><span>${esc(ex.label)} Q${q.n}</span>${esc(q.title)}</div><div class="c">${countdown(t - now)}</div><div class="w">Closes ${fmtWhen(q.closes_at)}, before ${esc(ex.label)} itself is due. <a href="${esc(ex.url)}" target="_blank" rel="noopener">Open ${esc(ex.label)}</a></div></li>`;
+  }).join("");
+}
+
 function rowHTML(r, st, now) {
   const due = r.due_at ? Date.parse(r.due_at) : null;
   const rel = r.release_at ? Date.parse(r.release_at) : null;
@@ -246,11 +333,13 @@ function rowHTML(r, st, now) {
     when = `Due ${esc(r.due)}`;
   }
   if (r.link && st !== "closed") actions = `<div class="actions"><a class="btn primary" href="${esc(r.link)}" target="_blank" rel="noopener">Open ${esc(r.id)}</a></div>`;
-  return `<li class="item ${st}"><div class="name">${esc(r.id)}${what}${weight}</div><div class="count">${count}</div><div class="when">${when}</div>${actions}</li>`;
+  const extra = st === "closed" ? "" : nextQuestionDeadline(r, now);
+  return `<li class="item ${st}"><div class="name">${esc(r.id)}${what}${weight}</div><div class="count">${count}</div><div class="when">${when}</div>${extra}${actions}${questionsHTML(r, now)}</li>`;
 }
 
 function renderLists() {
   const now = Date.now();
+  renderQuestionDeadlines(now);
   const open = [], next = [], done = [];
   for (const r of DATA.schedule) {
     const st = status(r, now);
@@ -261,10 +350,18 @@ function renderLists() {
   }
   next.sort((a, b) => (a[0].release_at || "z").localeCompare(b[0].release_at || "z"));
   done.reverse();
+  const openDetails = new Set([...document.querySelectorAll(".item")].filter((li) => li.querySelector(".qwrap")?.open).map((li) => li.querySelector(".name")?.firstChild?.textContent));
+  const closedDetails = new Set([...document.querySelectorAll(".item")].filter((li) => li.querySelector(".qwrap") && !li.querySelector(".qwrap").open).map((li) => li.querySelector(".name")?.firstChild?.textContent));
   $("open").innerHTML = open.map((x) => x[1]).join("") || `<li class="empty">Nothing open right now. Check "Coming up".</li>`;
   $("next").innerHTML = next.map((x) => x[1]).join("") || `<li class="empty">Nothing else scheduled.</li>`;
   $("done").innerHTML = done.map((x) => x[1]).join("");
   $("done-sum").textContent = `Finished (${done.length})`;
+  for (const li of document.querySelectorAll(".item")) {
+    const id = li.querySelector(".name")?.firstChild?.textContent, d = li.querySelector(".qwrap");
+    if (!d) continue;
+    if (openDetails.has(id)) d.open = true;
+    if (closedDetails.has(id)) d.open = false;
+  }
   $("done-wrap").hidden = !done.length;
 }
 
@@ -343,6 +440,16 @@ function icsFile() {
       `DESCRIPTION:Due ${r.due} IST.${r.link ? " " + r.link : ""} Dates can change; check the dashboard.`,
       ...(r.link ? [`URL:${r.link}`] : []),
       "BEGIN:VALARM", "TRIGGER:-P1D", "ACTION:DISPLAY", `DESCRIPTION:TDS ${r.id} due tomorrow`, "END:VALARM",
+      "END:VEVENT");
+  }
+  for (const ex of DATA.exams || []) for (const q of ex.questions || []) {
+    if (!q.own_deadline || Date.parse(q.closes_at) < Date.now()) continue;
+    const due = new Date(q.closes_at), startAt = new Date(due.getTime() - H);
+    lines.push("BEGIN:VEVENT", `UID:tds-${DATA.term}-${q.id}@tds-watcher`, `DTSTAMP:${stamp}`,
+      `DTSTART:${fmt(startAt)}`, `DTEND:${fmt(due)}`,
+      `SUMMARY:TDS ${ex.label} Q${q.n} closes: ${q.title.replace(/[,;\\]/g, " ")}`,
+      `DESCRIPTION:This question closes before ${ex.label} itself. ${ex.url}`, `URL:${ex.url}`,
+      "BEGIN:VALARM", "TRIGGER:-P1D", "ACTION:DISPLAY", `DESCRIPTION:TDS ${ex.label} Q${q.n} closes tomorrow`, "END:VALARM",
       "END:VEVENT");
   }
   lines.push("END:VCALENDAR");

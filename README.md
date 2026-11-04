@@ -24,11 +24,11 @@ GitHub Actions (every 20 min)                       Cloudflare Worker (free)
 |---|---|---|
 | Course repo, [sanand0/tools-in-data-science-public](https://github.com/sanand0/tools-in-data-science-public) | git diff; the term's Schedule table parsed row by row | The earliest signal. On 4 Nov 2026, GA4's new dates were committed at 06:30 while the live site still showed the old ones hours later. |
 | Live site, `tds.s-anand.net/<term>/` | text snapshot + diff | Anything published outside the repo |
-| Exam portal, every `exam.sanand.workers.dev/...` link | page plus its own JS/JSON, snapshot + diff | Changes inside an assignment page |
-| Unlinked exams, `tds-<term>-ga5`, `-p2`, `-roe`… | probed each run | Spots an exam that is live before the course page links it |
+| Exam portal questions, `exam-<slug>.info.js` and `exam-<slug>.js` (public, no login) | every question's title, plus dates in its text classified as opening/closing | New questions, removed questions, and **question-level deadlines** (e.g. P1's tasks close weeks before P1 itself) |
+| Unlinked exams, `exam-tds-<term>-ga5.info.js`, `-p2`, … | 404 until released | Spots an exam the moment it goes live, before the course page links it |
 
-**Emailed** (important only, to stay within sending limits): an assessment going live, new assessments, deadline / release-date / weight changes, exams spotted early.
-**Dashboard only**: new course pages and edits to page text.
+**Emailed** (important only, to stay within sending limits): an assessment going live, new assessments, **new questions**, deadline / release-date / weight changes (assessment or question level), exams spotted early.
+**Dashboard only**: new course pages, edits to page text, and reworded questions.
 
 ## Setup (about 30 minutes, all free)
 
@@ -97,7 +97,7 @@ Variables:
 | `SMTP_PORT` | `587` |
 | `MAIL_FROM` | your.alerts@gmail.com |
 | `MAIL_FROM_NAME` | `TDS Alerts` (optional) |
-| `GITHUB_ISSUES` | `0` to stop opening a GitHub issue per change (optional) |
+| `TDS_GITHUB_ISSUES` | `0` to stop opening a GitHub issue per change (optional) |
 
 Optional extra channels, as secrets: `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID`, `DISCORD_WEBHOOK_URL`, `NTFY_TOPIC`, `AIPIPE_TOKEN` (adds a short AI summary).
 
@@ -136,6 +136,7 @@ Python standard library only. The worker needs Node for `wrangler`.
 | Path | What it does |
 |---|---|
 | `watcher.py` | Checks, change detection, dashboard data |
+| `exams.py` | Reads the exam portal's question files: titles, per-question dates, diffs |
 | `emailer.py` | Confirmation and alert emails over SMTP |
 | `notify.py` | Telegram, Discord, Slack, ntfy, GitHub issues |
 | `site/index.html` | The dashboard |
