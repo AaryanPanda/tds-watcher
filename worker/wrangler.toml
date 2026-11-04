@@ -3,7 +3,7 @@ main = "src/index.js"
 compatibility_date = "2026-06-01"
 
 [[d1_databases]]
-binding = "tds_alerts"
+binding = "DB"
 database_name = "tds-alerts"
 database_id = "872e0247-201f-4d7c-8914-6f4ca18fb3d4"
 
