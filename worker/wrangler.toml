@@ -1,0 +1,19 @@
+name = "tds-alerts"
+main = "src/index.js"
+compatibility_date = "2026-06-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "tds-alerts"
+database_id = "REPLACE_WITH_ID_FROM_wrangler_d1_create"
+
+[vars]
+# Your dashboard address, e.g. https://aaryanpanda.github.io/tds-watcher
+DASHBOARD_URL = "https://YOUR-USERNAME.github.io/tds-watcher"
+# owner/repo of the watcher repo; used to trigger the confirmation email right after signup
+GITHUB_REPO = "YOUR-USERNAME/tds-watcher"
+
+# Secrets (set with `npx wrangler secret put NAME`):
+#   ADMIN_TOKEN   long random string; the watcher uses it to read the list. Same value as the repo secret ALERTS_ADMIN_TOKEN.
+#   GITHUB_TOKEN  optional fine-grained PAT with "Actions: write" on the watcher repo only.
+#                 Without it, confirmation emails go out on the next scheduled run (≤20 min) instead of ~1 min.

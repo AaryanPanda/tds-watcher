@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TDS Deadlines</title>
+<meta name="description" content="Every Tools in Data Science deadline with a live countdown, plus what changed on the course and exam portals. Student-run.">
+<meta property="og:title" content="TDS Deadlines">
+<meta property="og:description" content="Live countdowns for every TDS assignment, and email alerts when dates change.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EEF1F4; --surface: #FFFFFF; --ink: #14213D; --muted: #5B6676; --line: #D5DBE3;
+  --open: #0E8F80; --soon: #B7791F; --urgent: #C2381F; --waiting: #6650C8; --closed: #9AA4B2;
+  --open-soft: #DDF1EE; --soon-soft: #F7EBD6; --urgent-soft: #F8DFD9; --waiting-soft: #E7E3F8;
+  --focus: #2F6FDB;
+  --display: "Archivo", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0F1720; --surface: #17212C; --ink: #E3E9EF; --muted: #93A0B0; --line: #2A3745;
+    --open: #3CC4B2; --soon: #E2A646; --urgent: #FF7A5C; --waiting: #A796FF; --closed: #5D6B7A;
+    --open-soft: #13332F; --soon-soft: #3A2E17; --urgent-soft: #3D1F18; --waiting-soft: #27224A;
+    --focus: #7CA8FF;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 17px/1.55 var(--body);
+}
+a { color: inherit; text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- header */
+header.top { padding: 32px 0 20px; display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 24px; }
+h1 {
+  margin: 0; font: 800 clamp(2.1rem, 7vw, 3.4rem)/0.95 var(--display);
+  font-stretch: 112%; letter-spacing: -0.02em;
+}
+h1 small { display: block; font: 500 1rem/1.4 var(--body); letter-spacing: 0; color: var(--muted); margin-top: 10px; }
+.checked { color: var(--muted); font-size: 0.9rem; }
+.checked .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--open); margin-right: 6px; vertical-align: 1px; }
+.checked.stale .dot { background: var(--soon); }
+
+/* ---------- term ribbon (the one bold thing) */
+.ribbon { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 16px 12px; margin-bottom: 36px; }
+.ribbon-grid { position: relative; display: grid; grid-template-columns: 52px 1fr; row-gap: 5px; }
+.r-label { font: 700 0.8rem/14px var(--display); font-stretch: 85%; color: var(--muted); white-space: nowrap; }
+.r-track { position: relative; height: 14px; }
+.r-bar { position: absolute; top: 3px; height: 8px; border-radius: 4px; min-width: 8px; background: var(--closed); opacity: .55; }
+.r-bar.open { background: var(--open); opacity: 1; }
+.r-bar.soon { background: var(--soon); opacity: 1; }
+.r-bar.urgent { background: var(--urgent); opacity: 1; }
+.r-bar.waiting, .r-bar.upcoming { background: transparent; border: 2px dashed var(--waiting); opacity: .9; top: 2px; height: 10px; }
+.r-now { position: absolute; top: -6px; bottom: -4px; width: 2px; background: var(--ink); z-index: 2; pointer-events: none; }
+.r-now span { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font: 700 0.75rem var(--display); white-space: nowrap; }
+.r-months { position: relative; height: 22px; margin-left: 52px; border-top: 1px solid var(--line); margin-top: 8px; }
+.r-months span { position: absolute; top: 4px; font-size: 0.78rem; color: var(--muted); transform: translateX(-1px); padding-left: 4px; border-left: 1px solid var(--line); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 10px 0 0 52px; font-size: 0.82rem; color: var(--muted); }
+.legend i { display: inline-block; width: 18px; height: 8px; border-radius: 4px; margin-right: 6px; vertical-align: 1px; }
+
+/* ---------- layout */
+.cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+@media (min-width: 900px) { .cols { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 48px; } }
+h2 { font: 750 1.35rem/1.2 var(--display); font-stretch: 100%; margin: 0 0 4px; }
+.sub { color: var(--muted); margin: 0 0 14px; font-size: 0.95rem; }
+section + section { margin-top: 40px; }
+
+/* ---------- assessment rows */
+.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.item { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 16px 0 16px 14px; border-bottom: 1px solid var(--line); position: relative; }
+.item::before { content: ""; position: absolute; left: 0; top: 16px; bottom: 16px; width: 4px; border-radius: 2px; background: var(--closed); }
+.item.open::before { background: var(--open); }
+.item.soon::before { background: var(--soon); }
+.item.urgent::before { background: var(--urgent); }
+.item.waiting::before, .item.upcoming::before { background: var(--waiting); }
+.name { font: 750 1.15rem/1.25 var(--display); font-stretch: 100%; }
+.name .what { font: 400 0.95rem var(--body); color: var(--muted); margin-left: 6px; }
+.when { color: var(--muted); font-size: 0.92rem; }
+.count { grid-row: span 2; text-align: right; align-self: center; }
+.count b { display: block; font: 800 1.9rem/1 var(--display); font-stretch: 68%; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.count em { font-style: normal; font-size: 0.8rem; color: var(--muted); }
+.item.soon .count b { color: var(--soon); }
+.item.urgent .count b { color: var(--urgent); }
+.actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px;
+  font: 700 0.9rem var(--body); text-decoration: none; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); cursor: pointer;
+}
+.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn:hover { border-color: var(--ink); }
+.tag { display: inline-block; font-size: 0.8rem; font-weight: 700; padding: 2px 8px; border-radius: 6px; margin-left: 8px; vertical-align: 2px; }
+.tag.waiting { background: var(--waiting-soft); color: var(--waiting); }
+.tag.weight { background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 400; }
+.empty { color: var(--muted); padding: 16px 0; }
+details.done { margin-top: 28px; }
+details.done summary { cursor: pointer; font-weight: 700; color: var(--muted); }
+details.done .item { opacity: .7; }
+
+/* ---------- alerts form */
+.signup { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+.signup p { margin: 0 0 14px; }
+.signup form { display: flex; flex-wrap: wrap; gap: 8px; }
+.signup input[type=email] {
+  flex: 1 1 200px; min-width: 0; padding: 11px 12px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--bg); color: var(--ink); font: 1rem var(--body);
+}
+.signup button { padding: 11px 16px; font-size: 1rem; }
+.signup .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.signup .fine { font-size: 0.82rem; color: var(--muted); margin: 12px 0 0; }
+.msg { margin: 12px 0 0; font-weight: 700; }
+.msg.ok { color: var(--open); } .msg.err { color: var(--urgent); }
+
+/* ---------- change feed */
+.feed { list-style: none; margin: 0; padding: 0; }
+.feed > li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.feed time { font: 700 0.85rem var(--display); font-stretch: 90%; color: var(--muted); }
+.feed ul { margin: 6px 0 0; padding-left: 0; list-style: none; }
+.feed ul li { margin: 4px 0; font-size: 0.95rem; overflow-wrap: anywhere; }
+.feed .commit { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
+.feed .more-items { color: var(--muted); font-size: 0.9rem; }
+
+footer { color: var(--muted); font-size: 0.85rem; padding: 48px 0 40px; }
+footer p { margin: 4px 0; max-width: 70ch; }
+
+@media (max-width: 520px) {
+  body { font-size: 16px; }
+  .ribbon { padding: 16px 10px 10px; border-radius: 10px; }
+  .ribbon-grid { grid-template-columns: 40px 1fr; }
+  .r-months, .legend { margin-left: 40px; }
+  .count b { font-size: 1.6rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .r-now { animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: .45; } }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1 id="title">TDS deadlines<small id="tagline">Loading the schedule…</small></h1>
+    <div class="checked" id="checked" aria-live="polite"></div>
+  </header>
+
+  <div class="ribbon" id="ribbon" aria-label="Term timeline" hidden></div>
+
+  <div class="cols">
+    <main>
+      <section aria-labelledby="h-open">
+        <h2 id="h-open">Open now</h2>
+        <p class="sub">Submit before the countdown hits zero. Times are IST.</p>
+        <ul class="list" id="open"></ul>
+      </section>
+      <section aria-labelledby="h-next">
+        <h2 id="h-next">Coming up</h2>
+        <p class="sub">Release dates are tentative until the exam link appears.</p>
+        <ul class="list" id="next"></ul>
+      </section>
+      <details class="done" id="done-wrap"><summary id="done-sum">Finished</summary><ul class="list" id="done"></ul></details>
+      <p style="margin-top:24px"><button class="btn" id="ics" type="button">Add all deadlines to my calendar</button></p>
+    </main>
+
+    <aside>
+      <section class="signup" id="signup" aria-labelledby="h-alerts" hidden>
+        <h2 id="h-alerts">Get an email when something changes</h2>
+        <p class="sub" style="margin-top:6px">New assignment released, a deadline moved, a new exam link. Nothing else.</p>
+        <form id="form" novalidate>
+          <label for="email" class="hp">Email address</label>
+          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@study.iitm.ac.in or any email" required>
+          <div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <button class="btn primary" type="submit" id="go">Send me alerts</button>
+        </form>
+        <p class="msg" id="msg" role="status"></p>
+        <p class="fine" id="fine">You'll get a confirmation email first. Every alert has a one-click unsubscribe link.</p>
+      </section>
+
+      <section aria-labelledby="h-feed">
+        <h2 id="h-feed">What changed</h2>
+        <p class="sub">Picked up from the course repo, the course site and the exam portal.</p>
+        <ul class="feed" id="feed"></ul>
+        <button class="btn" id="older" type="button" hidden>Show older changes</button>
+      </section>
+    </aside>
+  </div>
+
+  <footer>
+    <p>Run by students, not by the TDS team. Always double-check on the <a id="src-site" href="https://tds.s-anand.net/">course page</a>, which is the official source.</p>
+    <p>Built from the public <a id="src-repo" href="https://github.com/sanand0/tools-in-data-science-public">course repository</a>. The checker runs every 20 minutes.</p>
+  </footer>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const linkify = (s) => esc(s).replace(/(https?:\/\/[^\s<)]+)/g, '<a href="$1" rel="noopener">$1</a>');
+let DATA = null, feedShown = 8;
+
+const H = 3600e3, D = 24 * H;
+
+function status(r, now) {
+  const due = r.due_at ? Date.parse(r.due_at) : null;
+  const rel = r.release_at ? Date.parse(r.release_at) : null;
+  if (due !== null && now > due) return "closed";
+  if (r.link) {
+    if (due !== null && due - now < D) return "urgent";
+    if (due !== null && due - now < 3 * D) return "soon";
+    return "open";
+  }
+  if (rel !== null && now >= rel) return "waiting"; // release date passed, no exam link yet
+  return "upcoming";
+}
+
+function countdown(ms) {
+  if (ms <= 0) return "0m";
+  const d = Math.floor(ms / D), h = Math.floor((ms % D) / H), m = Math.floor((ms % H) / 60e3);
+  if (d >= 2) return `${d}d ${h}h`;
+  if (d === 1) return `1d ${h}h`;
+  return `${h}h ${String(m).padStart(2, "0")}m`;
+}
+
+function rowHTML(r, st, now) {
+  const due = r.due_at ? Date.parse(r.due_at) : null;
+  const rel = r.release_at ? Date.parse(r.release_at) : null;
+  const what = r.content && r.content !== r.id ? `<span class="what">${esc(r.content)}</span>` : "";
+  const weight = r.weight && r.weight !== "—" ? `<span class="tag weight">${esc(r.weight)}</span>` : "";
+  let count = "", when = "", actions = "";
+  if (st === "closed") {
+    when = `Closed ${esc(r.due)}`;
+  } else if (st === "upcoming") {
+    count = rel ? `<b>${countdown(rel - now)}</b><em>until release</em>` : "";
+    when = `Releases ${esc(r.release || "TBA")}, due ${esc(r.due || "TBA")}`;
+  } else if (st === "waiting") {
+    count = due ? `<b>${countdown(due - now)}</b><em>left</em>` : "";
+    when = `Due ${esc(r.due)}<span class="tag waiting">Release date passed, link not posted yet</span>`;
+  } else {
+    count = due ? `<b>${countdown(due - now)}</b><em>left</em>` : "";
+    when = `Due ${esc(r.due)}`;
+  }
+  if (r.link && st !== "closed") actions = `<div class="actions"><a class="btn primary" href="${esc(r.link)}" target="_blank" rel="noopener">Open ${esc(r.id)}</a></div>`;
+  return `<li class="item ${st}"><div class="name">${esc(r.id)}${what}${weight}</div><div class="count">${count}</div><div class="when">${when}</div>${actions}</li>`;
+}
+
+function renderLists() {
+  const now = Date.now();
+  const open = [], next = [], done = [];
+  for (const r of DATA.schedule) {
+    const st = status(r, now);
+    const html = rowHTML(r, st, now);
+    if (st === "closed") done.push([r, html]);
+    else if (st === "upcoming") next.push([r, html]);
+    else open.push([r, html]);
+  }
+  next.sort((a, b) => (a[0].release_at || "z").localeCompare(b[0].release_at || "z"));
+  done.reverse();
+  $("open").innerHTML = open.map((x) => x[1]).join("") || `<li class="empty">Nothing open right now. Check "Coming up".</li>`;
+  $("next").innerHTML = next.map((x) => x[1]).join("") || `<li class="empty">Nothing else scheduled.</li>`;
+  $("done").innerHTML = done.map((x) => x[1]).join("");
+  $("done-sum").textContent = `Finished (${done.length})`;
+  $("done-wrap").hidden = !done.length;
+}
+
+function renderRibbon() {
+  const rows = DATA.schedule.filter((r) => r.due_at);
+  if (!rows.length) return;
+  const t = (s) => Date.parse(s);
+  const start = Math.min(...rows.map((r) => t(r.release_at || r.due_at)));
+  const end = Math.max(...rows.map((r) => t(r.due_at)));
+  const span = end - start || 1;
+  const pct = (x) => Math.max(0, Math.min(100, ((x - start) / span) * 100));
+  const now = Date.now();
+  const ordered = [...rows].sort((a, b) => (a.release_at || a.due_at).localeCompare(b.release_at || b.due_at));
+  let html = `<div class="ribbon-grid">`;
+  for (const r of ordered) {
+    const st = status(r, now);
+    const a = pct(t(r.release_at || r.due_at)), b = pct(t(r.due_at));
+    const label = `${r.id}: ${r.release || "?"} to ${r.due || "?"}`;
+    html += `<div class="r-label">${esc(r.id)}</div><div class="r-track"><div class="r-bar ${st}" style="left:${a}%;width:${Math.max(b - a, 0.8)}%" title="${esc(label)}" aria-label="${esc(label)}"></div></div>`;
+  }
+  if (now >= start && now <= end) {
+    html += `<div class="r-now" style="left:calc(52px + (100% - 52px) * ${pct(now) / 100})"><span>Today</span></div>`;
+  }
+  html += `</div><div class="r-months">`;
+  const d = new Date(start); d.setDate(1); d.setMonth(d.getMonth() + 1); d.setHours(0, 0, 0, 0);
+  while (d.getTime() < end) {
+    html += `<span style="left:${pct(d.getTime())}%">${d.toLocaleString("en-IN", { month: "short" })}</span>`;
+    d.setMonth(d.getMonth() + 1);
+  }
+  html += `</div><div class="legend"><span><i style="background:var(--open)"></i>Open</span><span><i style="background:var(--soon)"></i>Due within 3 days</span><span><i style="border:2px dashed var(--waiting);height:10px"></i>Not released yet</span><span><i style="background:var(--closed);opacity:.55"></i>Closed</span></div>`;
+  const rib = $("ribbon");
+  rib.innerHTML = html;
+  rib.hidden = false;
+  // keep the Today marker aligned with the narrower label column on phones
+  const lab = rib.querySelector(".r-label");
+  const w = lab ? lab.getBoundingClientRect().width : 52;
+  const nowEl = rib.querySelector(".r-now");
+  if (nowEl) nowEl.style.left = `calc(${w}px + (100% - ${w}px) * ${pct(now) / 100})`;
+}
+
+function renderFeed() {
+  const items = DATA.changes || [];
+  if (!items.length) {
+    $("feed").innerHTML = `<li class="empty">No changes since the checker started. When a deadline moves or a new assignment appears, it shows up here.</li>`;
+    return;
+  }
+  $("feed").innerHTML = items.slice(0, feedShown).map((c) => {
+    const when = new Date(c.at).toLocaleString("en-IN", { weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
+    const shown = c.items.slice(0, 6).map((i) => `<li>${linkify(i)}</li>`).join("");
+    const more = c.items.length > 6 ? `<li class="more-items">and ${c.items.length - 6} more</li>` : "";
+    const commit = c.commits?.[0] ? `<div class="commit">Course repo commit: “${esc(c.commits[0].msg)}”</div>` : "";
+    return `<li><time datetime="${esc(c.at)}">${when}</time><ul>${shown}${more}</ul>${commit}</li>`;
+  }).join("");
+  $("older").hidden = items.length <= feedShown;
+}
+
+function renderChecked() {
+  const at = Date.parse(DATA.checked_at), ago = Math.round((Date.now() - at) / 60e3);
+  const el = $("checked");
+  el.className = "checked" + (ago > 90 ? " stale" : "");
+  const text = ago < 1 ? "just now" : ago < 60 ? `${ago} min ago` : `${Math.round(ago / 60)} h ago`;
+  el.innerHTML = `<span class="dot"></span>Last checked ${text}`;
+}
+
+function icsFile() {
+  const pad = (n) => String(n).padStart(2, "0");
+  const fmt = (d) => `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z`;
+  const stamp = fmt(new Date());
+  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//tds-watcher//EN", "CALSCALE:GREGORIAN", `X-WR-CALNAME:TDS ${DATA.term}`];
+  for (const r of DATA.schedule) {
+    if (!r.due_at || Date.parse(r.due_at) < Date.now()) continue;
+    const due = new Date(r.due_at), startAt = new Date(due.getTime() - H);
+    lines.push("BEGIN:VEVENT", `UID:tds-${DATA.term}-${r.id}@tds-watcher`, `DTSTAMP:${stamp}`,
+      `DTSTART:${fmt(startAt)}`, `DTEND:${fmt(due)}`,
+      `SUMMARY:TDS ${r.id} due${r.content && r.content !== r.id ? " (" + r.content + ")" : ""}`,
+      `DESCRIPTION:Due ${r.due} IST.${r.link ? " " + r.link : ""} Dates can change; check the dashboard.`,
+      ...(r.link ? [`URL:${r.link}`] : []),
+      "BEGIN:VALARM", "TRIGGER:-P1D", "ACTION:DISPLAY", `DESCRIPTION:TDS ${r.id} due tomorrow`, "END:VALARM",
+      "END:VEVENT");
+  }
+  lines.push("END:VCALENDAR");
+  return lines.join("\r\n");
+}
+
+async function setupSignup() {
+  const api = DATA.alerts_api;
+  if (!api) return;
+  $("signup").hidden = false;
+  try {
+    const s = await (await fetch(api + "/stats")).json();
+    if (s.subscribers > 4) $("fine").textContent = `${s.subscribers} students get these alerts. You'll get a confirmation email first, and every alert has a one-click unsubscribe link.`;
+  } catch {}
+  $("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.target, msg = $("msg"), btn = $("go");
+    const email = f.email.value.trim();
+    if (!/^\S+@\S+\.\S+$/.test(email)) { msg.className = "msg err"; msg.textContent = "Enter a full email address, like you@study.iitm.ac.in."; f.email.focus(); return; }
+    btn.disabled = true; btn.textContent = "Sending…"; msg.textContent = "";
+    try {
+      const r = await fetch(api + "/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, website: f.website.value }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || `The signup service returned an error (${r.status}). Try again in a few minutes.`);
+      msg.className = "msg ok"; msg.textContent = j.message || "Check your inbox for a confirmation link.";
+      f.reset();
+    } catch (err) {
+      msg.className = "msg err"; msg.textContent = err.message.includes("fetch") ? "Couldn't reach the signup service. Check your connection and try again." : err.message;
+    } finally {
+      btn.disabled = false; btn.textContent = "Send me alerts";
+    }
+  });
+}
+
+async function load() {
+  try {
+    const r = await fetch("data.json?" + Math.floor(Date.now() / 60e3), { cache: "no-store" });
+    DATA = await r.json();
+  } catch {
+    $("tagline").textContent = "Couldn't load the schedule. Refresh the page, or check the course page directly.";
+    return;
+  }
+  const [y, m] = (DATA.term || "").split("-");
+  const termName = y ? `${new Date(+y, +m - 1).toLocaleString("en-IN", { month: "long" })} ${y}` : "";
+  $("tagline").textContent = `Tools in Data Science, ${termName} term. Every assignment with a live countdown.`;
+  document.title = `TDS deadlines, ${termName}`;
+  if (DATA.site) $("src-site").href = DATA.site + "/" + DATA.term + "/";
+  if (DATA.repo) $("src-repo").href = DATA.repo;
+  renderLists(); renderRibbon(); renderFeed(); renderChecked();
+  setupSignup();
+  setInterval(() => { renderLists(); renderChecked(); }, 30e3);
+}
+
+$("older").addEventListener("click", () => { feedShown += 10; renderFeed(); });
+$("ics").addEventListener("click", () => {
+  if (!DATA) return;
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([icsFile()], { type: "text/calendar" }));
+  a.download = `tds-${DATA.term}-deadlines.ics`;
+  a.click();
+  $("ics").textContent = "Downloaded. Re-download if dates change";
+});
+window.addEventListener("resize", () => DATA && renderRibbon());
+load();
+</script>
+</body>
+</html>

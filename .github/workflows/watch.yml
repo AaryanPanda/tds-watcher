@@ -1,0 +1,88 @@
+name: TDS watcher
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"   # every 20 min (GitHub may delay runs a few minutes)
+  workflow_dispatch:          # "Run workflow" button for a manual check
+  repository_dispatch:
+    types: [signup]           # sent by the signup worker so confirmation emails go out in ~1 min
+
+permissions:
+  contents: write   # commit state/ back
+  issues: write     # optional issue per change
+  pages: write      # publish the dashboard
+  id-token: write
+
+env:
+  ALERTS_API: ${{ vars.ALERTS_API }}
+  ALERTS_ADMIN_TOKEN: ${{ secrets.ALERTS_ADMIN_TOKEN }}
+  SMTP_HOST: ${{ vars.SMTP_HOST }}
+  SMTP_PORT: ${{ vars.SMTP_PORT }}
+  SMTP_USER: ${{ secrets.SMTP_USER }}
+  SMTP_PASS: ${{ secrets.SMTP_PASS }}
+  MAIL_FROM: ${{ vars.MAIL_FROM }}
+  MAIL_FROM_NAME: ${{ vars.MAIL_FROM_NAME }}
+  EMAIL_DAILY_LIMIT: ${{ vars.EMAIL_DAILY_LIMIT }}
+  DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
+
+jobs:
+  confirm:
+    if: github.event_name == 'repository_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    concurrency: { group: tds-confirm, cancel-in-progress: false }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python watcher.py --confirm-only
+
+  watch:
+    if: github.event_name != 'repository_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency: { group: tds-watch, cancel-in-progress: false }
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+
+      - name: Cache course repo clone
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: tds-repo-${{ github.run_id }}
+          restore-keys: tds-repo-
+
+      - name: Check for changes, send alerts, build dashboard data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ISSUES: ${{ vars.GITHUB_ISSUES }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          AIPIPE_TOKEN: ${{ secrets.AIPIPE_TOKEN }}
+          TDS_TERM: ${{ vars.TDS_TERM }}
+          TDS_EXTRA_URLS: ${{ vars.TDS_EXTRA_URLS }}
+        run: python watcher.py
+
+      - name: Save state
+        run: |
+          git config user.name "tds-watcher"
+          git config user.email "tds-watcher@users.noreply.github.com"
+          git add state
+          if ! git diff --cached --quiet; then
+            git commit -m "state: $(date -u +%FT%TZ)"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: site }
+      - uses: actions/deploy-pages@v4
+        id: deploy
