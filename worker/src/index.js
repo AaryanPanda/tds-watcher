@@ -11,6 +11,15 @@
 //          GET  /admin/active             → [{email, token}]
 
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]{1,64}@[A-Za-z0-9.-]{1,253}\.[A-Za-z]{2,24}$/;
+// Only IITM addresses: one per student, so nobody can sign up several times. Override with the
+// ALLOWED_DOMAINS variable (comma-separated); a domain also allows its subdomains (ds.study.iitm.ac.in).
+const DEFAULT_ALLOWED_DOMAINS = "study.iitm.ac.in";
+
+function allowedDomain(email, env) {
+  const domain = email.split("@").pop();
+  return (env.ALLOWED_DOMAINS || DEFAULT_ALLOWED_DOMAINS).split(",").map((d) => d.trim().toLowerCase()).filter(Boolean)
+    .some((d) => domain === d || domain.endsWith("." + d));
+}
 const MAX_PER_IP_PER_HOUR = 5;
 const RESEND_AFTER_MIN = 10;
 
@@ -56,6 +65,7 @@ async function subscribe(req, env) {
 
   const email = String(body.email || "").trim().toLowerCase();
   if (email.length > 254 || !EMAIL_RE.test(email)) return json({ error: "That doesn't look like a valid email address." }, 400);
+  if (!allowedDomain(email, env)) return json({ error: "Use your IITM student email, the one ending in study.iitm.ac.in (for example 23f1000000@ds.study.iitm.ac.in)." }, 400);
 
   const ip = req.headers.get("CF-Connecting-IP") || "unknown";
   const hourAgo = new Date(Date.now() - 3600e3).toISOString();
@@ -115,7 +125,7 @@ async function pending(req, env) {
   const { results } = await env.DB.prepare(
     "SELECT email, token FROM subscribers WHERE status = 'pending' AND confirm_sent = 0 AND created_at > ? LIMIT 200"
   ).bind(twoDays).all();
-  return json(results);
+  return json(results.filter((r) => allowedDomain(r.email, env)));
 }
 
 async function confirmSent(req, env) {
@@ -129,7 +139,7 @@ async function confirmSent(req, env) {
 
 async function active(req, env) {
   const { results } = await env.DB.prepare("SELECT email, token FROM subscribers WHERE status = 'active' ORDER BY confirmed_at").all();
-  return json(results);
+  return json(results.filter((r) => allowedDomain(r.email, env)));
 }
 
 // ---------------------------------------------------------------- helpers

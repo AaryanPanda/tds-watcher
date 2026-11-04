@@ -205,12 +205,12 @@ footer p { margin: 4px 0; max-width: 70ch; }
         <p class="sub" style="margin-top:6px">New assignment or question released, or a deadline moved. Nothing else.</p>
         <form id="form" novalidate>
           <label for="email" class="hp">Email address</label>
-          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@study.iitm.ac.in or any email" required>
+          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="23f1000000@ds.study.iitm.ac.in" required>
           <div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
           <button class="btn primary" type="submit" id="go">Send me alerts</button>
         </form>
         <p class="msg" id="msg" role="status"></p>
-        <p class="fine" id="fine">You'll get a confirmation email first. Every alert has a one-click unsubscribe link.</p>
+        <p class="fine" id="fine">IITM student emails only, one per student. You'll get a confirmation email first, and every alert has a one-click unsubscribe link.</p>
       </section>
 
       <section aria-labelledby="h-feed">
@@ -462,13 +462,14 @@ async function setupSignup() {
   $("signup").hidden = false;
   try {
     const s = await (await fetch(api + "/stats")).json();
-    if (s.subscribers > 4) $("fine").textContent = `${s.subscribers} students get these alerts. You'll get a confirmation email first, and every alert has a one-click unsubscribe link.`;
+    if (s.subscribers > 4) $("fine").textContent = `${s.subscribers} students get these alerts. IITM student emails only, one per student. You'll get a confirmation email first, and every alert has a one-click unsubscribe link.`;
   } catch {}
   $("form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const f = e.target, msg = $("msg"), btn = $("go");
     const email = f.email.value.trim();
-    if (!/^\S+@\S+\.\S+$/.test(email)) { msg.className = "msg err"; msg.textContent = "Enter a full email address, like you@study.iitm.ac.in."; f.email.focus(); return; }
+    if (!/^\S+@\S+\.\S+$/.test(email)) { msg.className = "msg err"; msg.textContent = "Enter your full IITM email, like 23f1000000@ds.study.iitm.ac.in."; f.email.focus(); return; }
+    if (!/(^|\.)study\.iitm\.ac\.in$/i.test(email.split("@").pop())) { msg.className = "msg err"; msg.textContent = "Use your IITM student email, the one ending in study.iitm.ac.in."; f.email.focus(); return; }
     btn.disabled = true; btn.textContent = "Sending…"; msg.textContent = "";
     try {
       const r = await fetch(api + "/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, website: f.website.value }) });

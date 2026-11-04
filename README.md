@@ -3,7 +3,7 @@
 A student-run deadline board and alert service for IITM's **Tools in Data Science** course.
 
 - **Dashboard** (GitHub Pages): every assessment with a live countdown, a term timeline, an "add to calendar" button, and a feed of what changed. Pin its link in the WhatsApp group.
-- **Email alerts**: anyone can sign up with their student or personal email on the dashboard. They confirm by email, and each alert has a one-click unsubscribe link.
+- **Email alerts**: students sign up with their IITM email (`…study.iitm.ac.in`, one per student) on the dashboard. They confirm by email, and each alert has a one-click unsubscribe link.
 - **Checker**: runs every 20 minutes on GitHub Actions, for free.
 
 ```
@@ -127,6 +127,7 @@ Python standard library only. The worker needs Node for `wrangler`.
 
 - Emails are stored only in your Cloudflare D1 database, never in the repo or on the dashboard.
 - Signup needs email confirmation, so nobody can subscribe someone else.
+- Only IITM addresses (`study.iitm.ac.in` and its subdomains such as `ds.` and `es.`) are accepted, so each student can sign up once. Change it with an `ALLOWED_DOMAINS` variable in `wrangler.toml` (comma-separated).
 - The signup form answers the same way whether or not an address is already on the list, so it can't be used to check who signed up.
 - Signups are limited to 5 per hour per network, and a hidden field catches simple bots.
 - Unsubscribe is one click, including from Gmail's own "Unsubscribe" button.
