@@ -1,0 +1,93 @@
+{
+  "F": {
+    "content": "Final end-term (in-person)",
+    "due": "Sun 10 Jan 2027",
+    "link": "",
+    "release": "Sun 10 Jan 2027",
+    "weight": "20%"
+  },
+  "GA0": {
+    "content": "Bootcamp",
+    "due": "Sun 11 Oct",
+    "link": "https://exam.sanand.workers.dev/tds-2026-09-ga0",
+    "release": "Wed 16 Sep",
+    "weight": "—"
+  },
+  "GA1": {
+    "content": "Week-1",
+    "due": "Sun 18 Oct",
+    "link": "https://exam.sanand.workers.dev/tds-2026-09-ga1",
+    "release": "Wed 07 Oct",
+    "weight": "—"
+  },
+  "GA2": {
+    "content": "Week-2",
+    "due": "Sun 18 Oct",
+    "link": "https://exam.sanand.workers.dev/tds-2026-09-ga2",
+    "release": "Wed 07 Oct",
+    "weight": "—"
+  },
+  "GA3": {
+    "content": "Week-3",
+    "due": "Sat 31 Oct, 11:59 PM",
+    "link": "https://exam.sanand.workers.dev/tds-2026-09-ga3",
+    "release": "Wed 21 Oct",
+    "weight": "—"
+  },
+  "GA4": {
+    "content": "Week-4",
+    "due": "Wed 11 Nov, 11:59 PM",
+    "link": "https://exam.sanand.workers.dev/tds-2026-09-ga4",
+    "release": "Wed 04 Nov",
+    "weight": "—"
+  },
+  "GA5": {
+    "content": "Week-5",
+    "due": "Wed 18 Nov",
+    "link": "",
+    "release": "Wed 04 Nov",
+    "weight": "—"
+  },
+  "GA6": {
+    "content": "Week-6",
+    "due": "Mon 23 Nov",
+    "link": "",
+    "release": "Wed 11 Nov",
+    "weight": "—"
+  },
+  "GA7": {
+    "content": "Week-7",
+    "due": "Mon 30 Nov",
+    "link": "",
+    "release": "Wed 18 Nov",
+    "weight": "—"
+  },
+  "GA8": {
+    "content": "Week-8",
+    "due": "Mon 07 Dec",
+    "link": "",
+    "release": "Wed 25 Nov",
+    "weight": "—"
+  },
+  "P1": {
+    "content": "Project 1",
+    "due": "Mon 17 Nov",
+    "link": "https://exam.sanand.workers.dev/tds-2026-09-p1",
+    "release": "Sat 17 Oct",
+    "weight": "20%"
+  },
+  "P2": {
+    "content": "Project 2",
+    "due": "Sun 13 Dec",
+    "link": "",
+    "release": "Fri 06 Nov",
+    "weight": "20%"
+  },
+  "ROE": {
+    "content": "Remote Online Exam",
+    "due": "Sun 29 Nov, 1:45 PM",
+    "link": "",
+    "release": "Sun 29 Nov, 1:00 PM",
+    "weight": "20%"
+  }
+}
