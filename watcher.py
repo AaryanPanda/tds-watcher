@@ -470,7 +470,7 @@ def main():
     args = ap.parse_args()
 
     if args.confirm_only:
-        emailer.send_confirmations()
+        safely("sending confirmation emails", emailer.send_confirmations)
         return
 
     state = load("state.json", {})
@@ -478,8 +478,8 @@ def main():
     repo = check_repo(state, since=args.since)
     page_items, page_files, errors = [], {}, []
     if not args.no_web:
-        page_items, page_files, errors = check_pages(state)
-        exam_items, exam_errors = check_exams(state, repo["schedule"], repo["term"])
+        page_items, page_files, errors = safely("checking the course site", check_pages, state) or ([], {}, ["course site check failed"])
+        exam_items, exam_errors = safely("checking the exam portal", check_exams, state, repo["schedule"], repo["term"]) or ([], ["exam portal check failed"])
         page_items, errors = exam_items + page_items, errors + exam_errors
     if first_run:
         page_items, page_files = [], {}  # baseline only
@@ -508,7 +508,7 @@ def main():
         return
 
     if not first_run:
-        emailer.send_confirmations()
+        safely("sending confirmation emails", emailer.send_confirmations)
     if report:
         notify.send_all(report["title"], report["text"])
         important = sorted((i for i in items if i.startswith(IMPORTANT)),
@@ -517,13 +517,24 @@ def main():
             soon = upcoming(repo["schedule"], repo["term"])
             subject = "TDS: " + _plain(important[0]) + (f" (+{len(important) - 1} more)" if len(important) > 1 else "")
             plain = "\n".join(f"• {i}" for i in important) + (f"\n\nDue within 3 days: {'; '.join(soon)}" if soon else "")
-            emailer.broadcast(subject[:150], important, plain, state)
+            safely("emailing subscribers", emailer.broadcast, subject[:150], important, plain, state)
         STATE.mkdir(exist_ok=True)
         with open(STATE / "changelog.md", "a") as f:
             f.write(f"\n## {report['title']}\n\n```\n{report['text']}\n```\n")
     write_site_data(state, repo, items)
     save("state.json", state)
     save("schedule.json", repo["schedule"])
+
+
+def safely(what, fn, *args):
+    """Run one part of the check; if it fails, log it and carry on so the dashboard still updates."""
+    try:
+        return fn(*args)
+    except Exception as e:  # noqa: BLE001
+        print(f"::warning::Problem {what}: {type(e).__name__}: {e}")
+        if isinstance(e, urllib.error.HTTPError) and e.fp:
+            print("    response:", e.read()[:300].decode("utf-8", "replace"))
+        return None
 
 
 def _plain(s):
