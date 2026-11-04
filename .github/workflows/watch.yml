@@ -81,7 +81,12 @@ jobs:
           git add state
           if ! git diff --cached --quiet; then
             git commit -m "state: $(date -u +%FT%TZ)"
-            git push
+            # someone may have pushed to the repo while this run was working: pull their commits, then push
+            for attempt in 1 2 3; do
+              git pull --rebase --quiet && git push && exit 0
+              echo "Push failed (attempt $attempt), retrying in 10s"; sleep 10
+            done
+            exit 1
           fi
 
       - uses: actions/configure-pages@v5
@@ -89,3 +94,9 @@ jobs:
         with: { path: site }
       - uses: actions/deploy-pages@v4
         id: deploy
+        continue-on-error: true   # GitHub Pages sometimes returns a temporary 5xx; retry once below
+      - name: Retry publishing if GitHub Pages had a temporary error
+        if: steps.deploy.outcome == 'failure'
+        run: sleep 30
+      - uses: actions/deploy-pages@v4
+        if: steps.deploy.outcome == 'failure'
