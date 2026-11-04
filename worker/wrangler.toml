@@ -3,15 +3,15 @@ main = "src/index.js"
 compatibility_date = "2026-06-01"
 
 [[d1_databases]]
-binding = "DB"
+binding = "tds_alerts"
 database_name = "tds-alerts"
-database_id = "REPLACE_WITH_ID_FROM_wrangler_d1_create"
+database_id = "872e0247-201f-4d7c-8914-6f4ca18fb3d4"
 
 [vars]
 # Your dashboard address, e.g. https://aaryanpanda.github.io/tds-watcher
-DASHBOARD_URL = "https://YOUR-USERNAME.github.io/tds-watcher"
+DASHBOARD_URL = "https://aaryanpanda.github.io/tds-watcher"
 # owner/repo of the watcher repo; used to trigger the confirmation email right after signup
-GITHUB_REPO = "YOUR-USERNAME/tds-watcher"
+GITHUB_REPO = "AaryanPanda/tds-watcher"
 
 # Secrets (set with `npx wrangler secret put NAME`):
 #   ADMIN_TOKEN   long random string; the watcher uses it to read the list. Same value as the repo secret ALERTS_ADMIN_TOKEN.
