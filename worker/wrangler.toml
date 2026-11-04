@@ -7,6 +7,10 @@ binding = "tds_alerts"
 database_name = "tds-alerts"
 database_id = "872e0247-201f-4d7c-8914-6f4ca18fb3d4"
 
+# Every 15 minutes, start the checker on GitHub
+[triggers]
+crons = ["*/15 * * * *"]
+
 [vars]
 # Your dashboard address, e.g. https://aaryanpanda.github.io/tds-watcher
 DASHBOARD_URL = "https://aaryanpanda.github.io/tds-watcher"

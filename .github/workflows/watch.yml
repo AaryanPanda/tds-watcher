@@ -1,11 +1,14 @@
 name: TDS watcher
 
 on:
-  schedule:
-    - cron: "*/20 * * * *"   # every 20 min (GitHub may delay runs a few minutes)
-  workflow_dispatch:          # "Run workflow" button for a manual check
+  # Main clock: the Cloudflare Worker sends a "check" event every 15 minutes (worker/wrangler.toml, [triggers]).
   repository_dispatch:
-    types: [signup]           # sent by the signup worker so confirmation emails go out in ~1 min
+    types: [check, signup]    # "signup" = send confirmation emails right away
+  # Backup clock: GitHub's own scheduler. It can delay or drop runs when busy, so it's only the fallback,
+  # on quiet minutes away from the top of the hour.
+  schedule:
+    - cron: "7,27,47 * * * *"
+  workflow_dispatch:          # "Run workflow" button for a manual check
 
 permissions:
   contents: write   # commit state/ back
@@ -27,7 +30,7 @@ env:
 
 jobs:
   confirm:
-    if: github.event_name == 'repository_dispatch'
+    if: github.event_name == 'repository_dispatch' && github.event.action == 'signup'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     concurrency: { group: tds-confirm, cancel-in-progress: false }
@@ -38,7 +41,7 @@ jobs:
       - run: python watcher.py --confirm-only
 
   watch:
-    if: github.event_name != 'repository_dispatch'
+    if: github.event_name != 'repository_dispatch' || github.event.action == 'check'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     concurrency: { group: tds-watch, cancel-in-progress: false }

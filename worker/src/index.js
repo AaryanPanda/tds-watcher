@@ -15,6 +15,12 @@ const MAX_PER_IP_PER_HOUR = 5;
 const RESEND_AFTER_MIN = 10;
 
 export default {
+  // Cron trigger (wrangler.toml [triggers]): ask GitHub to run the checker. Cloudflare's cron fires on time;
+  // GitHub's own scheduler can delay or skip runs when it's busy.
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(kickWorkflow(env, "check"));
+  },
+
   async fetch(req, env) {
     const url = new URL(req.url);
     const cors = corsHeaders(env);
@@ -128,18 +134,22 @@ async function active(req, env) {
 
 // ---------------------------------------------------------------- helpers
 
-async function kickWorkflow(env) {
-  if (!env.GITHUB_TOKEN || !env.GITHUB_REPO) return;
+async function kickWorkflow(env, eventType = "signup") {
+  if (!env.GITHUB_TOKEN || !env.GITHUB_REPO) {
+    console.log("GITHUB_TOKEN or GITHUB_REPO not set; skipping workflow trigger");
+    return;
+  }
   try {
-    await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/dispatches`, {
+    const r = await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/dispatches`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${env.GITHUB_TOKEN}`,
         Accept: "application/vnd.github+json",
         "User-Agent": "tds-alerts-worker",
       },
-      body: JSON.stringify({ event_type: "signup" }),
+      body: JSON.stringify({ event_type: eventType }),
     });
+    if (!r.ok) console.error(`dispatch ${eventType} failed: HTTP ${r.status} ${await r.text()}`);
   } catch (e) {
     console.error("dispatch failed", e); // the scheduled run will still send it
   }
