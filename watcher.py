@@ -328,7 +328,9 @@ def check_pages(state):
             d = short_diff(prev.get("text", ""), text)
             if d:
                 files[url] = d
-        pages[url] = {"hash": h, "text": text[:200_000], "seen": datetime.now(IST).isoformat(timespec="minutes")}
+        if not prev or prev["hash"] != h:
+            # only touch saved state when the page really changed, so quiet runs leave state.json alone
+            pages[url] = {"hash": h, "text": text[:200_000], "seen": datetime.now(IST).isoformat(timespec="minutes")}
     return items, files, errors
 
 

@@ -49,7 +49,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
+      # Check out the newest main, not the commit from when the run was triggered: if GitHub queued this run
+      # behind a slower one, that one may already have saved newer state.
       - uses: actions/checkout@v4
+        with: { ref: main }
 
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
@@ -82,8 +85,10 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "state: $(date -u +%FT%TZ)"
             # someone may have pushed to the repo while this run was working: pull their commits, then push
+            # if another run saved state meanwhile, keep this run's state (it is the newer one)
             for attempt in 1 2 3; do
-              git pull --rebase --quiet && git push && exit 0
+              git pull --rebase -X theirs --quiet && git push && exit 0
+              git rebase --abort 2>/dev/null || true
               echo "Push failed (attempt $attempt), retrying in 10s"; sleep 10
             done
             exit 1
