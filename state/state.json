@@ -1,4 +1,8 @@
 {
+  "email_quota": {
+    "day": "2026-11-07",
+    "sent": 12
+  },
   "exams": {
     "tds-2026-09-ga0": {
       "first_seen": {
@@ -706,7 +710,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "61510f6c354a",
+          "hash": "e6c8c1894c1e",
           "id": "q-prediction-aipipe-server",
           "opens_at": null,
           "own_deadline": false,
@@ -726,7 +730,7 @@
               "text": "Thursday, 5 November 2026 at 11:59:59 PM"
             }
           ],
-          "hash": "d4af5a9636c5",
+          "hash": "7436a1568367",
           "id": "q-audio-tds-human-exchange",
           "opens_at": "2026-10-19T08:00:00+05:30",
           "own_deadline": true,
@@ -741,7 +745,7 @@
               "text": "Sunday, 1 November 2026 at 11:59:59 PM"
             }
           ],
-          "hash": "1aa3c90fff76",
+          "hash": "343e754133d6",
           "id": "q-motion-air-ink",
           "opens_at": null,
           "own_deadline": true,
@@ -756,7 +760,7 @@
               "text": "Friday 23 October 2026, 12 noon"
             }
           ],
-          "hash": "c2699833578f",
+          "hash": "2f16b6ddecb3",
           "id": "q-trading-missing-invoice",
           "opens_at": null,
           "own_deadline": true,
@@ -771,7 +775,7 @@
               "text": "Monday, 26 October 2026, 11:59 PM"
             }
           ],
-          "hash": "72b083df9d27",
+          "hash": "6524d3a84fb9",
           "id": "q-face-expressions",
           "opens_at": null,
           "own_deadline": true,
@@ -796,30 +800,39 @@
               "text": "Monday 2 November 2026, midnight"
             }
           ],
-          "hash": "16e3ac76687a",
+          "hash": "8a7598177005",
           "id": "q-trading-human-exchange-r1",
           "opens_at": "2026-10-22T12:00:00+05:30",
           "own_deadline": true,
           "title": "Trading game: Human Exchange, Round 1"
         },
         {
-          "closes_at": "2026-11-02T23:59:59+05:30",
-          "dates": [
-            {
-              "at": "2026-11-02T23:59:59+05:30",
-              "kind": "close",
-              "text": "Monday 2 November 2026"
-            }
-          ],
-          "hash": "123649b3f2ea",
+          "closes_at": null,
+          "dates": [],
+          "hash": "e2f675e89c37",
           "id": "q-trading-picture-story",
           "opens_at": null,
-          "own_deadline": true,
+          "own_deadline": false,
           "title": "Trading game: Picture Stories"
         }
       ]
     }
   },
+  "history": [
+    {
+      "at": "2026-11-07T11:30:16+05:30",
+      "commits": [],
+      "items": [
+        "✏️ P1 Q1 \"Predict AI Pipe usage: 2–8 November 2026\" wording was updated",
+        "✏️ P1 Q2 \"TDS Human Exchange: Offer something useful\" wording was updated",
+        "✏️ P1 Q3 \"Motion games: Air Ink character drawing\" wording was updated",
+        "✏️ P1 Q4 \"Trading game: Reconcile the Missing Invoice\" wording was updated",
+        "✏️ P1 Q5 \"Capture 10 facial expressions (preparation for the next task)\" wording was updated",
+        "✏️ P1 Q6 \"Trading game: Human Exchange, Round 1\" wording was updated",
+        "⏰ P1 Q7 \"Trading game: Picture Stories\" deadline changed: Mon 02 Nov, 11:59 PM → —"
+      ]
+    }
+  ],
   "pages": {
     "https://exam.sanand.workers.dev/tds-2026-09-ga0": {
       "hash": "fd9dde20322c7037",
