@@ -29,3 +29,11 @@
 • ✏️ GA4 Q1 "Review classmates' GA3 faces (24 comparisons)" wording was updated
 • 🆕 New question in GA4 (Q2): Food Court: share a food court, live (20 minutes)
 ```
+
+## TDS: ✏️ GA4 Q2 "Food Court: share a food court, live (20 minutes)" wording was updated
+
+```
+📢 TDS 2026-09 update — Sun 08 Nov, 10:15 AM IST
+
+• ✏️ GA4 Q2 "Food Court: share a food court, live (20 minutes)" wording was updated
+```

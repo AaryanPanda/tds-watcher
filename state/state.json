@@ -692,7 +692,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "2707f63ca713",
+          "hash": "3cae145fca37",
           "id": "q-food-court-discount",
           "opens_at": null,
           "own_deadline": false,
@@ -829,6 +829,13 @@
     }
   },
   "history": [
+    {
+      "at": "2026-11-08T10:15:20+05:30",
+      "commits": [],
+      "items": [
+        "✏️ GA4 Q2 \"Food Court: share a food court, live (20 minutes)\" wording was updated"
+      ]
+    },
     {
       "at": "2026-11-08T09:45:20+05:30",
       "commits": [],
