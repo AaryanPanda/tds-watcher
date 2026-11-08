@@ -20,3 +20,12 @@
 • ✏️ P1 Q6 "Trading game: Human Exchange, Round 1" wording was updated
 • ⏰ P1 Q7 "Trading game: Picture Stories" deadline changed: Mon 02 Nov, 11:59 PM → —
 ```
+
+## TDS: ✏️ GA4 Q1 "Review classmates' GA3 faces (24 comparisons)" wording was updated
+
+```
+📢 TDS 2026-09 update — Sun 08 Nov, 09:45 AM IST
+
+• ✏️ GA4 Q1 "Review classmates' GA3 faces (24 comparisons)" wording was updated
+• 🆕 New question in GA4 (Q2): Food Court: share a food court, live (20 minutes)
+```

@@ -1,6 +1,6 @@
 {
   "email_quota": {
-    "day": "2026-11-07",
+    "day": "2026-11-08",
     "sent": 12
   },
   "exams": {
@@ -670,6 +670,7 @@
     },
     "tds-2026-09-ga4": {
       "first_seen": {
+        "q-food-court-discount": "2026-11-08T09:45:17+05:30",
         "q-ga4-face-peer-review-server": null
       },
       "info": {
@@ -682,11 +683,20 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "2d9fd53702b8",
+          "hash": "63e2209fadd0",
           "id": "q-ga4-face-peer-review-server",
           "opens_at": null,
           "own_deadline": false,
           "title": "Review classmates' GA3 faces (24 comparisons)"
+        },
+        {
+          "closes_at": null,
+          "dates": [],
+          "hash": "2707f63ca713",
+          "id": "q-food-court-discount",
+          "opens_at": null,
+          "own_deadline": false,
+          "title": "Food Court: share a food court, live (20 minutes)"
         }
       ]
     },
@@ -819,6 +829,14 @@
     }
   },
   "history": [
+    {
+      "at": "2026-11-08T09:45:20+05:30",
+      "commits": [],
+      "items": [
+        "✏️ GA4 Q1 \"Review classmates' GA3 faces (24 comparisons)\" wording was updated",
+        "🆕 New question in GA4 (Q2): Food Court: share a food court, live (20 minutes)"
+      ]
+    },
     {
       "at": "2026-11-07T11:30:16+05:30",
       "commits": [],
