@@ -37,3 +37,27 @@
 
 • ✏️ GA4 Q2 "Food Court: share a food court, live (20 minutes)" wording was updated
 ```
+
+## TDS: ⏰ GA4 (Week-4) deadline changed: Wed 11 Nov, 11:59 PM → Sun 15 Nov, 11:59 PM
+
+```
+📢 TDS 2026-09 update — Mon 09 Nov, 09:00 AM IST
+
+• ⏰ GA4 (Week-4) deadline changed: Wed 11 Nov, 11:59 PM → Sun 15 Nov, 11:59 PM
+• ⏰ GA4 deadline on the exam portal changed: Wed 11 Nov, 11:59 PM → Sun 15 Nov, 11:59 PM
+• ✏️ GA4 Q1 "Review classmates' GA3 faces (24 comparisons)" wording was updated
+• ✏️ GA4 Q2 "Food Court: share a food court, live (20 minutes)" wording was updated
+• 🆕 New question in GA4 (Q3): Time Use Charts: make a data poster with your team, live (45 minutes)
+• ✏️ Course page changed: https://tds.s-anand.net/2026-09/
+
+Commits:
+  2026-11-09 11:29  Extend Sep 2026 GA4 deadline to Sun 15 Nov  (f7147cb)
+
+Diff — 2026-09/README.md:
+  -| Week-4                                                   | [**GA4**][GA4] |      — | Wed 04 Nov          | Wed 11 Nov, 11:59 PM |
+  +| Week-4                                                   | [**GA4**][GA4] |      — | Wed 04 Nov          | Sun 15 Nov, 11:59 PM |
+
+Diff — https://tds.s-anand.net/2026-09/:
+  -Week-4 | GA4 | — | Wed 04 Nov | Wed 11 Nov, 11:59 PM |
+  +Week-4 | GA4 | — | Wed 04 Nov | Sun 15 Nov, 11:59 PM |
+```
