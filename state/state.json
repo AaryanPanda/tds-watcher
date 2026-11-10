@@ -1,7 +1,7 @@
 {
   "email_quota": {
-    "day": "2026-11-09",
-    "sent": 5
+    "day": "2026-11-10",
+    "sent": 18
   },
   "exams": {
     "tds-2026-09-ga0": {
@@ -238,7 +238,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "fb369bd8c1fc",
+          "hash": "ea453e370760",
           "id": "q-vercel-latency",
           "opens_at": null,
           "own_deadline": false,
@@ -274,7 +274,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "a8e925bdc2bb",
+          "hash": "b582b586b54c",
           "id": "q-vs-code-version",
           "opens_at": null,
           "own_deadline": false,
@@ -283,7 +283,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "781b5b113831",
+          "hash": "6b871e916029",
           "id": "q-http-headers-server",
           "opens_at": null,
           "own_deadline": false,
@@ -292,7 +292,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "5756bd089838",
+          "hash": "b1a548b2385d",
           "id": "q-uv-http-post",
           "opens_at": null,
           "own_deadline": false,
@@ -301,7 +301,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "af488ec29165",
+          "hash": "eeb8f55ac662",
           "id": "q-npx-prettier",
           "opens_at": null,
           "own_deadline": false,
@@ -310,7 +310,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "89330cde1dbf",
+          "hash": "35016d127830",
           "id": "q-broken-json-server",
           "opens_at": null,
           "own_deadline": false,
@@ -319,7 +319,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "f7f75aa8ba92",
+          "hash": "0d8dc3df8c82",
           "id": "q-config-precedence-server",
           "opens_at": null,
           "own_deadline": false,
@@ -328,7 +328,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "781b3f67f15c",
+          "hash": "9ae436c63a71",
           "id": "q-rename-files-server",
           "opens_at": null,
           "own_deadline": false,
@@ -337,7 +337,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "5761453e27f1",
+          "hash": "c5bc8946bc9d",
           "id": "q-csv-sales-analysis-server",
           "opens_at": null,
           "own_deadline": false,
@@ -346,7 +346,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "e40c91249ee7",
+          "hash": "2096e3defe04",
           "id": "q-github-pages",
           "opens_at": null,
           "own_deadline": false,
@@ -355,7 +355,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "6b1cc0d8fe40",
+          "hash": "7924811c2219",
           "id": "q-git-forensics-token-server",
           "opens_at": null,
           "own_deadline": false,
@@ -364,7 +364,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "7f0cf3cdafc3",
+          "hash": "2924f7a61635",
           "id": "q-llm-yes-no-split",
           "opens_at": null,
           "own_deadline": false,
@@ -373,7 +373,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "79908af53d9f",
+          "hash": "da058b682950",
           "id": "q-termlog-rec-server",
           "opens_at": null,
           "own_deadline": false,
@@ -382,7 +382,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "b77591b72897",
+          "hash": "732b1064fea1",
           "id": "q-mcp-server-live-server",
           "opens_at": null,
           "own_deadline": false,
@@ -391,7 +391,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "008ac5bc7b86",
+          "hash": "fe5dacc3037d",
           "id": "q-ledger-agent-server",
           "opens_at": null,
           "own_deadline": false,
@@ -400,7 +400,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "561118bb1a6e",
+          "hash": "8023a77bf308",
           "id": "q-visual-game-tangram",
           "opens_at": null,
           "own_deadline": false,
@@ -436,7 +436,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "405b7dc33730",
+          "hash": "9ca2b3974d34",
           "id": "q-termlog-httpbin-server",
           "opens_at": null,
           "own_deadline": false,
@@ -445,7 +445,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "eab5e825f7ef",
+          "hash": "73b735d734eb",
           "id": "q-model-intelligence-auto-server",
           "opens_at": null,
           "own_deadline": false,
@@ -454,7 +454,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "6da8dfb9affc",
+          "hash": "07d9622e731f",
           "id": "q-fastapi-metrics-cors-server",
           "opens_at": null,
           "own_deadline": false,
@@ -463,7 +463,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "4ab564b81273",
+          "hash": "0106e59fb358",
           "id": "q-oauth-jwks-verify-server",
           "opens_at": null,
           "own_deadline": false,
@@ -472,7 +472,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "31dcb1d4e515",
+          "hash": "fc69181217a8",
           "id": "q-config-precedence-server",
           "opens_at": null,
           "own_deadline": false,
@@ -481,7 +481,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "8572d0006584",
+          "hash": "d325657d65b4",
           "id": "q-compose-redis-tunnel-server",
           "opens_at": null,
           "own_deadline": false,
@@ -490,7 +490,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "453cb80eb8fe",
+          "hash": "b26b5a15ae22",
           "id": "q-deploy-analytics-platform-server",
           "opens_at": null,
           "own_deadline": false,
@@ -499,7 +499,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "aaf6405be2b3",
+          "hash": "708b9bcdedf1",
           "id": "q-observability-metrics-server",
           "opens_at": null,
           "own_deadline": false,
@@ -508,7 +508,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "9c87729ca7e1",
+          "hash": "54b6d0568e99",
           "id": "q-ollama-tunnel-llm-server",
           "opens_at": null,
           "own_deadline": false,
@@ -517,7 +517,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "425f643728ca",
+          "hash": "0aee982f626d",
           "id": "q-local-llm-structured-server",
           "opens_at": null,
           "own_deadline": false,
@@ -526,7 +526,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "16d3a9abc457",
+          "hash": "22406b0b1e52",
           "id": "q-api-idempotency-pagination-server",
           "opens_at": null,
           "own_deadline": false,
@@ -535,7 +535,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "83a94831dea4",
+          "hash": "d29fb08be26c",
           "id": "q-middleware-ratelimit-cors-server",
           "opens_at": null,
           "own_deadline": false,
@@ -544,7 +544,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "d487ffa4bf40",
+          "hash": "c7f93d081ba2",
           "id": "q-ollama-stream-reassembly-server",
           "opens_at": null,
           "own_deadline": false,
@@ -553,7 +553,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "b766bda72f80",
+          "hash": "ab414cb0499c",
           "id": "q-docker-build-cache-server",
           "opens_at": null,
           "own_deadline": false,
@@ -562,7 +562,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "f5e815788b25",
+          "hash": "4660796703dd",
           "id": "q-termlog-ollama-modelfile-server",
           "opens_at": null,
           "own_deadline": false,
@@ -660,7 +660,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "5f2aa4d57b27",
+          "hash": "04e39882749f",
           "id": "q-face-morph-rank",
           "opens_at": null,
           "own_deadline": false,
@@ -684,7 +684,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "64b2377a4a15",
+          "hash": "031da51b4f6c",
           "id": "q-ga4-face-peer-review-server",
           "opens_at": null,
           "own_deadline": false,
@@ -693,7 +693,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "1023ddb05349",
+          "hash": "a7141ab6d726",
           "id": "q-food-court-discount",
           "opens_at": null,
           "own_deadline": false,
@@ -702,7 +702,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "58f8622a3c44",
+          "hash": "4c9367f3f806",
           "id": "q-time-use-charts",
           "opens_at": null,
           "own_deadline": false,
@@ -713,6 +713,7 @@
     "tds-2026-09-p1": {
       "first_seen": {
         "q-audio-tds-human-exchange": null,
+        "q-face-expression-classifier": "2026-11-10T13:45:16+05:30",
         "q-face-expressions": null,
         "q-motion-air-ink": null,
         "q-prediction-aipipe-server": null,
@@ -730,7 +731,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "e6c8c1894c1e",
+          "hash": "9fc3cb77dd52",
           "id": "q-prediction-aipipe-server",
           "opens_at": null,
           "own_deadline": false,
@@ -750,7 +751,7 @@
               "text": "Thursday, 5 November 2026 at 11:59:59 PM"
             }
           ],
-          "hash": "7436a1568367",
+          "hash": "699dd1273a32",
           "id": "q-audio-tds-human-exchange",
           "opens_at": "2026-10-19T08:00:00+05:30",
           "own_deadline": true,
@@ -765,7 +766,7 @@
               "text": "Sunday, 1 November 2026 at 11:59:59 PM"
             }
           ],
-          "hash": "343e754133d6",
+          "hash": "c9f62580968c",
           "id": "q-motion-air-ink",
           "opens_at": null,
           "own_deadline": true,
@@ -780,7 +781,7 @@
               "text": "Friday 23 October 2026, 12 noon"
             }
           ],
-          "hash": "2f16b6ddecb3",
+          "hash": "302a4c147026",
           "id": "q-trading-missing-invoice",
           "opens_at": null,
           "own_deadline": true,
@@ -795,7 +796,7 @@
               "text": "Monday, 26 October 2026, 11:59 PM"
             }
           ],
-          "hash": "6524d3a84fb9",
+          "hash": "4668bbe5467b",
           "id": "q-face-expressions",
           "opens_at": null,
           "own_deadline": true,
@@ -820,7 +821,7 @@
               "text": "Monday 2 November 2026, midnight"
             }
           ],
-          "hash": "8a7598177005",
+          "hash": "604314c146b1",
           "id": "q-trading-human-exchange-r1",
           "opens_at": "2026-10-22T12:00:00+05:30",
           "own_deadline": true,
@@ -829,16 +830,74 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "e2f675e89c37",
+          "hash": "9bc066cd2c5e",
           "id": "q-trading-picture-story",
           "opens_at": null,
           "own_deadline": false,
           "title": "Trading game: Picture Stories"
+        },
+        {
+          "closes_at": null,
+          "dates": [],
+          "hash": "fdbe3f9e5ae6",
+          "id": "q-face-expression-classifier",
+          "opens_at": null,
+          "own_deadline": false,
+          "title": "Train a face-expression classifier (10 bonus marks later)"
         }
       ]
     }
   },
   "history": [
+    {
+      "at": "2026-11-10T13:45:18+05:30",
+      "commits": [],
+      "items": [
+        "✏️ GA0 Q23 \"Deploy a POST analytics endpoint to Vercel\" wording was updated",
+        "✏️ GA1 Q1 \"VS Code Version\" wording was updated",
+        "✏️ GA1 Q2 \"Find the code in the response headers\" wording was updated",
+        "✏️ GA1 Q3 \"POST HTTP requests with uv\" wording was updated",
+        "✏️ GA1 Q4 \"Run command with npx\" wording was updated",
+        "✏️ GA1 Q5 \"Fix Broken JSON File\" wording was updated",
+        "✏️ GA1 Q6 \"Resolve 12-Factor Config Precedence\" wording was updated",
+        "✏️ GA1 Q7 \"Reorganize Files with Shell Commands\" wording was updated",
+        "✏️ GA1 Q8 \"Extract and Analyze CSV Sales Data from ZIP\" wording was updated",
+        "✏️ GA1 Q9 \"Host your portfolio on GitHub Pages\" wording was updated",
+        "✏️ GA1 Q10 \"Git Forensics: Recover the Leaked Token\" wording was updated",
+        "✏️ GA1 Q11 \"One prompt, two models, two answers\" wording was updated",
+        "✏️ GA1 Q12 \"Decode it in the terminal (termlog)\" wording was updated",
+        "✏️ GA1 Q13 \"Build a Live MCP Server\" wording was updated",
+        "✏️ GA1 Q14 \"The Ledger Agent\" wording was updated",
+        "✏️ GA1 Q15 \"Geometric Reasoning: Tangram Silhouette Dissection\" wording was updated",
+        "✏️ GA2 Q1 \"HTTPBin terminal lab (termlog)\" wording was updated",
+        "✏️ GA2 Q2 \"Differentiate model intelligence — automatic evaluation\" wording was updated",
+        "✏️ GA2 Q3 \"Deploy a CORS-Aware Metrics API\" wording was updated",
+        "✏️ GA2 Q4 \"OAuth 2.0 / OIDC Token Verification Service\" wording was updated",
+        "✏️ GA2 Q5 \"Resolve 12-Factor Config Precedence\" wording was updated",
+        "✏️ GA2 Q6 \"Multi-Container App via Compose, Exposed by Tunnel\" wording was updated",
+        "✏️ GA2 Q7 \"Deploy a POST Analytics Endpoint\" wording was updated",
+        "✏️ GA2 Q8 \"Production Observability: Metrics, Health & Structured Logs\" wording was updated",
+        "✏️ GA2 Q9 \"Expose a Local LLM through a Tunnel\" wording was updated",
+        "✏️ GA2 Q10 \"Local LLM Structured-Output Service\" wording was updated",
+        "✏️ GA2 Q11 \"API Engineering: Idempotency + Pagination + Rate Limit\" wording was updated",
+        "✏️ GA2 Q12 \"Middleware Stack: Rate-Limit + CORS + Request Context\" wording was updated",
+        "✏️ GA2 Q13 \"Recover a fragmented LLM stream\" wording was updated",
+        "✏️ GA2 Q14 \"Diagnose Docker build cache misses\" wording was updated",
+        "✏️ GA2 Q15 \"Create a custom Ollama model (termlog)\" wording was updated",
+        "✏️ P1 Q1 \"Predict AI Pipe usage: 2–8 November 2026\" wording was updated",
+        "✏️ P1 Q2 \"TDS Human Exchange: Offer something useful\" wording was updated",
+        "✏️ P1 Q3 \"Motion games: Air Ink character drawing\" wording was updated",
+        "✏️ P1 Q4 \"Trading game: Reconcile the Missing Invoice\" wording was updated",
+        "✏️ P1 Q5 \"Capture 10 facial expressions (preparation for the next task)\" wording was updated",
+        "✏️ P1 Q6 \"Trading game: Human Exchange, Round 1\" wording was updated",
+        "✏️ P1 Q7 \"Trading game: Picture Stories\" wording was updated",
+        "🆕 New question in P1 (Q8): Train a face-expression classifier (10 bonus marks later)",
+        "✏️ GA3 Q8 \"Which faces are easiest to morph?\" wording was updated",
+        "✏️ GA4 Q1 \"Review classmates' GA3 faces (24 comparisons)\" wording was updated",
+        "✏️ GA4 Q2 \"Food Court: share a food court, live (20 minutes)\" wording was updated",
+        "✏️ GA4 Q3 \"Time Use Charts: make a data poster with your team, live (45 minutes)\" wording was updated"
+      ]
+    },
     {
       "at": "2026-11-09T09:00:17+05:30",
       "commits": [
