@@ -111,3 +111,19 @@ Diff — https://tds.s-anand.net/2026-09/:
 • ✏️ GA4 Q2 "Food Court: share a food court, live (20 minutes)" wording was updated
 • ✏️ GA4 Q3 "Time Use Charts: make a data poster with your team, live (45 minutes)" wording was updated
 ```
+
+## TDS: ✏️ P1 Q1 "Predict AI Pipe usage: 2–8 November 2026" wording was updated
+
+```
+📢 TDS 2026-09 update — Wed 11 Nov, 11:15 AM IST
+
+• ✏️ P1 Q1 "Predict AI Pipe usage: 2–8 November 2026" wording was updated
+• ✏️ P1 Q2 "TDS Human Exchange: Offer something useful" wording was updated
+• ✏️ P1 Q3 "Motion games: Air Ink character drawing" wording was updated
+• ✏️ P1 Q4 "Trading game: Reconcile the Missing Invoice" wording was updated
+• ✏️ P1 Q5 "Capture 10 facial expressions (preparation for the next task)" wording was updated
+• ✏️ P1 Q6 "Trading game: Human Exchange, Round 1" wording was updated
+• ✏️ P1 Q7 "Trading game: Picture Stories" wording was updated
+• ✏️ P1 Q8 "Train a face-expression classifier (10 bonus marks later)" wording was updated
+• 🆕 New question in P1 (Q9): Invisible Ink: read phone writing (10 bonus marks later)
+```

@@ -1,7 +1,7 @@
 {
   "email_quota": {
-    "day": "2026-11-10",
-    "sent": 18
+    "day": "2026-11-11",
+    "sent": 0
   },
   "exams": {
     "tds-2026-09-ga0": {
@@ -712,6 +712,7 @@
     },
     "tds-2026-09-p1": {
       "first_seen": {
+        "q-air-ink-classifier": "2026-11-11T11:15:16+05:30",
         "q-audio-tds-human-exchange": null,
         "q-face-expression-classifier": "2026-11-10T13:45:16+05:30",
         "q-face-expressions": null,
@@ -731,7 +732,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "9fc3cb77dd52",
+          "hash": "e7d86e50c744",
           "id": "q-prediction-aipipe-server",
           "opens_at": null,
           "own_deadline": false,
@@ -751,7 +752,7 @@
               "text": "Thursday, 5 November 2026 at 11:59:59 PM"
             }
           ],
-          "hash": "699dd1273a32",
+          "hash": "bdd5f102beba",
           "id": "q-audio-tds-human-exchange",
           "opens_at": "2026-10-19T08:00:00+05:30",
           "own_deadline": true,
@@ -766,7 +767,7 @@
               "text": "Sunday, 1 November 2026 at 11:59:59 PM"
             }
           ],
-          "hash": "c9f62580968c",
+          "hash": "ac4f505f887a",
           "id": "q-motion-air-ink",
           "opens_at": null,
           "own_deadline": true,
@@ -781,7 +782,7 @@
               "text": "Friday 23 October 2026, 12 noon"
             }
           ],
-          "hash": "302a4c147026",
+          "hash": "6771f410d188",
           "id": "q-trading-missing-invoice",
           "opens_at": null,
           "own_deadline": true,
@@ -796,7 +797,7 @@
               "text": "Monday, 26 October 2026, 11:59 PM"
             }
           ],
-          "hash": "4668bbe5467b",
+          "hash": "d1b83fac008d",
           "id": "q-face-expressions",
           "opens_at": null,
           "own_deadline": true,
@@ -821,7 +822,7 @@
               "text": "Monday 2 November 2026, midnight"
             }
           ],
-          "hash": "604314c146b1",
+          "hash": "7a03c6a606bd",
           "id": "q-trading-human-exchange-r1",
           "opens_at": "2026-10-22T12:00:00+05:30",
           "own_deadline": true,
@@ -830,7 +831,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "9bc066cd2c5e",
+          "hash": "0d3cea1fb004",
           "id": "q-trading-picture-story",
           "opens_at": null,
           "own_deadline": false,
@@ -839,16 +840,40 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "fdbe3f9e5ae6",
+          "hash": "7308e29148b4",
           "id": "q-face-expression-classifier",
           "opens_at": null,
           "own_deadline": false,
           "title": "Train a face-expression classifier (10 bonus marks later)"
+        },
+        {
+          "closes_at": null,
+          "dates": [],
+          "hash": "b571e2385a65",
+          "id": "q-air-ink-classifier",
+          "opens_at": null,
+          "own_deadline": false,
+          "title": "Invisible Ink: read phone writing (10 bonus marks later)"
         }
       ]
     }
   },
   "history": [
+    {
+      "at": "2026-11-11T11:15:19+05:30",
+      "commits": [],
+      "items": [
+        "✏️ P1 Q1 \"Predict AI Pipe usage: 2–8 November 2026\" wording was updated",
+        "✏️ P1 Q2 \"TDS Human Exchange: Offer something useful\" wording was updated",
+        "✏️ P1 Q3 \"Motion games: Air Ink character drawing\" wording was updated",
+        "✏️ P1 Q4 \"Trading game: Reconcile the Missing Invoice\" wording was updated",
+        "✏️ P1 Q5 \"Capture 10 facial expressions (preparation for the next task)\" wording was updated",
+        "✏️ P1 Q6 \"Trading game: Human Exchange, Round 1\" wording was updated",
+        "✏️ P1 Q7 \"Trading game: Picture Stories\" wording was updated",
+        "✏️ P1 Q8 \"Train a face-expression classifier (10 bonus marks later)\" wording was updated",
+        "🆕 New question in P1 (Q9): Invisible Ink: read phone writing (10 bonus marks later)"
+      ]
+    },
     {
       "at": "2026-11-10T13:45:18+05:30",
       "commits": [],
