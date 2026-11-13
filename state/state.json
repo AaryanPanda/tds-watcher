@@ -1,7 +1,7 @@
 {
   "email_quota": {
-    "day": "2026-11-11",
-    "sent": 0
+    "day": "2026-11-13",
+    "sent": 19
   },
   "exams": {
     "tds-2026-09-ga0": {
@@ -672,6 +672,7 @@
       "first_seen": {
         "q-food-court-discount": "2026-11-08T09:45:17+05:30",
         "q-ga4-face-peer-review-server": null,
+        "q-roe-ideas": "2026-11-13T16:00:19+05:30",
         "q-time-use-charts": "2026-11-09T09:00:15+05:30"
       },
       "info": {
@@ -684,7 +685,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "031da51b4f6c",
+          "hash": "41790baeef6c",
           "id": "q-ga4-face-peer-review-server",
           "opens_at": null,
           "own_deadline": false,
@@ -693,7 +694,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "a7141ab6d726",
+          "hash": "c7a5488c8f03",
           "id": "q-food-court-discount",
           "opens_at": null,
           "own_deadline": false,
@@ -702,11 +703,20 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "4c9367f3f806",
+          "hash": "3db7bdb78012",
           "id": "q-time-use-charts",
           "opens_at": null,
           "own_deadline": false,
           "title": "Time Use Charts: make a data poster with your team, live (45 minutes)"
+        },
+        {
+          "closes_at": null,
+          "dates": [],
+          "hash": "4a0eaa2650bf",
+          "id": "q-roe-ideas",
+          "opens_at": null,
+          "own_deadline": false,
+          "title": "Invent an ROE question"
         }
       ]
     },
@@ -859,6 +869,16 @@
     }
   },
   "history": [
+    {
+      "at": "2026-11-13T16:00:21+05:30",
+      "commits": [],
+      "items": [
+        "✏️ GA4 Q1 \"Review classmates' GA3 faces (24 comparisons)\" wording was updated",
+        "✏️ GA4 Q2 \"Food Court: share a food court, live (20 minutes)\" wording was updated",
+        "✏️ GA4 Q3 \"Time Use Charts: make a data poster with your team, live (45 minutes)\" wording was updated",
+        "🆕 New question in GA4 (Q4): Invent an ROE question"
+      ]
+    },
     {
       "at": "2026-11-11T11:15:19+05:30",
       "commits": [],

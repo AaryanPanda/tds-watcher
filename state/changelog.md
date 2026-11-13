@@ -127,3 +127,16 @@ Diff — https://tds.s-anand.net/2026-09/:
 • ✏️ P1 Q8 "Train a face-expression classifier (10 bonus marks later)" wording was updated
 • 🆕 New question in P1 (Q9): Invisible Ink: read phone writing (10 bonus marks later)
 ```
+
+## TDS: ✏️ GA4 Q1 "Review classmates' GA3 faces (24 comparisons)" wording was updated
+
+```
+📢 TDS 2026-09 update — Fri 13 Nov, 04:00 PM IST
+
+• ✏️ GA4 Q1 "Review classmates' GA3 faces (24 comparisons)" wording was updated
+• ✏️ GA4 Q2 "Food Court: share a food court, live (20 minutes)" wording was updated
+• ✏️ GA4 Q3 "Time Use Charts: make a data poster with your team, live (45 minutes)" wording was updated
+• 🆕 New question in GA4 (Q4): Invent an ROE question
+
+⏳ Due within 3 days: GA4 due Sun 15 Nov, 11:59 PM
+```
