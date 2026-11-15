@@ -1,7 +1,7 @@
 {
   "email_quota": {
-    "day": "2026-11-13",
-    "sent": 19
+    "day": "2026-11-15",
+    "sent": 20
   },
   "exams": {
     "tds-2026-09-ga0": {
@@ -685,7 +685,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "41790baeef6c",
+          "hash": "5ff5c828d2c1",
           "id": "q-ga4-face-peer-review-server",
           "opens_at": null,
           "own_deadline": false,
@@ -694,16 +694,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "c7a5488c8f03",
-          "id": "q-food-court-discount",
-          "opens_at": null,
-          "own_deadline": false,
-          "title": "Food Court: share a food court, live (20 minutes)"
-        },
-        {
-          "closes_at": null,
-          "dates": [],
-          "hash": "3db7bdb78012",
+          "hash": "6d3d3f666186",
           "id": "q-time-use-charts",
           "opens_at": null,
           "own_deadline": false,
@@ -712,7 +703,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "4a0eaa2650bf",
+          "hash": "95bf1f271fc6",
           "id": "q-roe-ideas",
           "opens_at": null,
           "own_deadline": false,
@@ -869,6 +860,16 @@
     }
   },
   "history": [
+    {
+      "at": "2026-11-15T08:45:20+05:30",
+      "commits": [],
+      "items": [
+        "✏️ GA4 Q1 \"Review classmates' GA3 faces (24 comparisons)\" wording was updated",
+        "✏️ GA4 Q2 \"Time Use Charts: make a data poster with your team, live (45 minutes)\" wording was updated",
+        "✏️ GA4 Q3 \"Invent an ROE question\" wording was updated",
+        "🗑️ Question removed from GA4: Food Court: share a food court, live (20 minutes)"
+      ]
+    },
     {
       "at": "2026-11-13T16:00:21+05:30",
       "commits": [],
