@@ -165,3 +165,15 @@ Diff — https://tds.s-anand.net/2026-09/:
 
 ⏳ Due within 3 days: P1 due Mon 17 Nov; GA4 due Sun 15 Nov, 11:59 PM
 ```
+
+## TDS: ✏️ GA4 Q1 "Review classmates' GA3 faces (24 comparisons)" wording was updated
+
+```
+📢 TDS 2026-09 update — Sun 15 Nov, 02:00 PM IST
+
+• ✏️ GA4 Q1 "Review classmates' GA3 faces (24 comparisons)" wording was updated
+• ✏️ GA4 Q2 "Time Use Charts: make a data poster with your team, live (45 minutes)" wording was updated
+• 🆕 New question in GA4 (Q3): Invent an ROE question
+
+⏳ Due within 3 days: P1 due Mon 17 Nov; GA4 due Sun 15 Nov, 11:59 PM
+```

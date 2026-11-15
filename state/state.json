@@ -685,7 +685,7 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "e061524e52c6",
+          "hash": "5ff5c828d2c1",
           "id": "q-ga4-face-peer-review-server",
           "opens_at": null,
           "own_deadline": false,
@@ -694,11 +694,20 @@
         {
           "closes_at": null,
           "dates": [],
-          "hash": "edf6b5c4ab9a",
+          "hash": "6d3d3f666186",
           "id": "q-time-use-charts",
           "opens_at": null,
           "own_deadline": false,
           "title": "Time Use Charts: make a data poster with your team, live (45 minutes)"
+        },
+        {
+          "closes_at": null,
+          "dates": [],
+          "hash": "95bf1f271fc6",
+          "id": "q-roe-ideas",
+          "opens_at": null,
+          "own_deadline": false,
+          "title": "Invent an ROE question"
         }
       ]
     },
@@ -851,6 +860,15 @@
     }
   },
   "history": [
+    {
+      "at": "2026-11-15T14:00:18+05:30",
+      "commits": [],
+      "items": [
+        "✏️ GA4 Q1 \"Review classmates' GA3 faces (24 comparisons)\" wording was updated",
+        "✏️ GA4 Q2 \"Time Use Charts: make a data poster with your team, live (45 minutes)\" wording was updated",
+        "🆕 New question in GA4 (Q3): Invent an ROE question"
+      ]
+    },
     {
       "at": "2026-11-15T09:00:17+05:30",
       "commits": [],
