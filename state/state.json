@@ -711,6 +711,58 @@
         }
       ]
     },
+    "tds-2026-09-ga5": {
+      "first_seen": {
+        "q-ball-tracker-server": null,
+        "q-harness-safety-router-server": null,
+        "q-ollama-faiss-rank-correlation-server": null,
+        "q-rag-colosseum-server": null
+      },
+      "info": {
+        "end": "2026-11-27T23:59:59+05:30",
+        "start": "2026-11-16T00:00:00+05:30",
+        "title": "TDS 2026 Sep GA5"
+      },
+      "label": "GA5",
+      "questions": [
+        {
+          "closes_at": null,
+          "dates": [],
+          "hash": "a55dfecd1912",
+          "id": "q-rag-colosseum-server",
+          "opens_at": null,
+          "own_deadline": false,
+          "title": "RAG Colosseum: 20-Probe Deployment Gauntlet (50-Passage Knowledge Base)"
+        },
+        {
+          "closes_at": null,
+          "dates": [],
+          "hash": "5f6d7b327135",
+          "id": "q-ollama-faiss-rank-correlation-server",
+          "opens_at": null,
+          "own_deadline": false,
+          "title": "Dual Embedding Alignment: Ollama, FAISS, and Rank Correlation"
+        },
+        {
+          "closes_at": null,
+          "dates": [],
+          "hash": "ee515507c9b2",
+          "id": "q-ball-tracker-server",
+          "opens_at": null,
+          "own_deadline": false,
+          "title": "Track the red ball"
+        },
+        {
+          "closes_at": null,
+          "dates": [],
+          "hash": "eb4392a03762",
+          "id": "q-harness-safety-router-server",
+          "opens_at": null,
+          "own_deadline": false,
+          "title": "Harness Engineering: Contextual Safety and Model Routing"
+        }
+      ]
+    },
     "tds-2026-09-p1": {
       "first_seen": {
         "q-air-ink-classifier": "2026-11-11T11:15:16+05:30",
