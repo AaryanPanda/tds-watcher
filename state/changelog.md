@@ -177,3 +177,28 @@ Diff — https://tds.s-anand.net/2026-09/:
 
 ⏳ Due within 3 days: P1 due Mon 17 Nov; GA4 due Sun 15 Nov, 11:59 PM
 ```
+
+## TDS: 🚀 GA5 (Week-5) is now LIVE: https://exam.sanand.workers.dev/tds-2026-09-ga5 (due Fri 27 Nov, 11:59 PM)
+
+```
+📢 TDS 2026-09 update — Mon 16 Nov, 10:30 AM IST
+
+• 🚀 GA5 (Week-5) is now LIVE: https://exam.sanand.workers.dev/tds-2026-09-ga5 (due Fri 27 Nov, 11:59 PM)
+• ⏰ GA5 (Week-5) deadline changed: Wed 18 Nov → Fri 27 Nov, 11:59 PM
+• 📅 GA5 (Week-5) release date changed: Wed 04 Nov → Mon 16 Nov
+• ✏️ Course page changed: https://tds.s-anand.net/2026-09/
+
+⏳ Due within 3 days: P1 due Mon 17 Nov
+
+Commits:
+  2026-11-16 12:46  Set Sep 2026 GA5 to Nov 16-27 and link exam  (bcdcf14)
+
+Diff — 2026-09/README.md:
+  -| Week-5                                                   | **GA5**        |      — | Wed 04 Nov          | Wed 18 Nov          |
+  +| Week-5                                                   | [**GA5**][GA5] |      — | Mon 16 Nov          | Fri 27 Nov, 11:59 PM |
+  +[GA5]: https://exam.sanand.workers.dev/tds-2026-09-ga5
+
+Diff — https://tds.s-anand.net/2026-09/:
+  -Week-5 | GA5 | — | Wed 04 Nov | Wed 18 Nov |
+  +Week-5 | GA5 | — | Mon 16 Nov | Fri 27 Nov, 11:59 PM |
+```
