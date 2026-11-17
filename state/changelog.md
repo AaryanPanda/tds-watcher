@@ -202,3 +202,93 @@ Diff — https://tds.s-anand.net/2026-09/:
   -Week-5 | GA5 | — | Wed 04 Nov | Wed 18 Nov |
   +Week-5 | GA5 | — | Mon 16 Nov | Fri 27 Nov, 11:59 PM |
 ```
+
+## TDS: 📄 New page: https://tds.s-anand.net/2026-09/week-4/chunking-strategies/
+
+```
+📢 TDS 2026-09 update — Tue 17 Nov, 10:45 PM IST
+
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/chunking-strategies/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/contextual-retrieval/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/corrective-rag/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/graphrag/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/hybrid-search/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/late-chunking/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/llm-grounding/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/multimodal-embeddings/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/production-rag-failures/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/query-augmentation/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/ragas-evaluation/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/reranking/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/semantic-caching/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-4/vector-databases/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/agent-evaluation-benchmarking/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/agent-failure-modes/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/agent-fundamentals/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/agent-memory-systems/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/async-parallelism/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/loop-engineering/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/mcp/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/multi-agent-systems/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/sandboxing/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/specialized-agents/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/state-machines-hybrid-agents/
+• 📄 New page: https://tds.s-anand.net/2026-09/week-5/tool-calling/
+• ✏️ Course page changed: https://tds.s-anand.net/2026-09/
+
+⏳ Due within 3 days: P1 due Mon 17 Nov
+
+Commits:
+  2026-11-17 11:43  Add Week 4 & 5 content for 2026-09 and enable global KaTeX rendering  (5054eed)
+
+Diff — 2026-09/_sidebar.md:
+  -<summary>Week 4</summary>
+  +<summary>Week 4: RAG & Hybrid RAG</summary>
+  -- [Overview](week-4/README.md)
+  +- [Vector Databases](week-4/vector-databases.md)
+  +- [Chunking Strategies](week-4/chunking-strategies.md)
+  +- [Late Chunking](week-4/late-chunking.md)
+  +- [Contextual Retrieval](week-4/contextual-retrieval.md)
+  +- [Hybrid Search](week-4/hybrid-search.md)
+  +- [Reranking](week-4/reranking.md)
+  +- [Query Augmentation](week-4/query-augmentation.md)
+  +- [Semantic Caching](week-4/semantic-caching.md)
+  +- [Multimodal Embeddings](week-4/multimodal-embeddings.md)
+  +- [GraphRAG](week-4/graphrag.md)
+  +- [Corrective & Agentic RAG](week-4/corrective-rag.md)
+  +- [LLM Grounding & Citations](week-4/llm-grounding.md)
+  +- [RAGAS Evaluation](week-4/ragas-evaluation.md)
+  +- [Production RAG: What LLMs Can't Do](week-4/production-rag-failures.md)
+  -<summary>Week 5</summary>
+  +<summary>Week 5: Agentic AI</summary>
+  -- [Overview](week-5/README.md)
+  … (12 more changed lines)
+
+Diff — https://tds.s-anand.net/2026-09/:
+  +Week 4: RAG & Hybrid RAG Vector Databases
+  +Chunking Strategies
+  +Late Chunking
+  +Contextual Retrieval
+  +Hybrid Search
+  +Reranking
+  +Query Augmentation
+  +Semantic Caching
+  +Multimodal Embeddings
+  +GraphRAG
+  +Corrective & Agentic RAG
+  +LLM Grounding & Citations
+  +RAGAS Evaluation
+  +Production RAG: What LLMs Can’t Do
+  +Week 5: Agentic AI Agent Fundamentals
+  +Tool / Function Calling
+  +Loop Engineering
+  +Model Context Protocol (/2026-09/MCP/)
+  +Agent Memory Systems
+  +Multi-Agent Systems
+  +Specialized Agents
+  +Async & Parallelism
+  +Sandboxing Agent Code
+  +Agent Evaluation & Benchmarking
+  +Why Production Agents Fail
+  +Deterministic State Machines
+```
