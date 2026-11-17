@@ -292,3 +292,38 @@ Diff — https://tds.s-anand.net/2026-09/:
   +Why Production Agents Fail
   +Deterministic State Machines
 ```
+
+## TDS: TDS content changed
+
+```
+📢 TDS 2026-09 update — Wed 18 Nov, 01:00 AM IST
+
+• Content changed (details below)
+
+Commits:
+  2026-11-18 00:35  fix: add math code block render hooks and standardize KaTeX delimiters  (e4e4f3c)
+
+Diff — 2026-09/week-4/hybrid-search.md:
+  -```math
+  +$$
+  -```
+  +$$
+  -- $r(d)$ = rank of document $d$ in ranked list $r$  
+  -- $k$ = constant (typically 60) that limits the impact of very high ranks
+  +- \(r(d)\) = rank of document \(d\) in ranked list \(r\)  
+  +- \(k\) = constant (typically 60) that limits the impact of very high ranks
+
+Diff — 2026-09/week-4/ragas-evaluation.md:
+  -```math
+  +$$
+  -```
+  +$$
+  -```math
+  +$$
+  -```
+  +$$
+
+Diff — 2026-09/week-5/agent-failure-modes.md:
+  -| **Step Multiplication** | Keeps trying forever ($p^N$ reliability crash) | Hard step budget (e.g. 15 max) + graceful escalation |
+  +| **Step Multiplication** | Keeps trying forever (\(p^N\) reliability crash) | Hard step budget (e.g. 15 max) + graceful escalation |
+```

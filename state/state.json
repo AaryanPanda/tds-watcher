@@ -913,6 +913,17 @@
   },
   "history": [
     {
+      "at": "2026-11-18T01:00:23+05:30",
+      "commits": [
+        {
+          "date": "2026-11-18 00:35",
+          "msg": "fix: add math code block render hooks and standardize KaTeX delimiters",
+          "sha": "e4e4f3c"
+        }
+      ],
+      "items": []
+    },
+    {
       "at": "2026-11-17T22:45:26+05:30",
       "commits": [
         {
@@ -1161,6 +1172,6 @@
     "https://exam.sanand.workers.dev/tds-2026-09-p2": false,
     "https://exam.sanand.workers.dev/tds-2026-09-roe": false
   },
-  "repo_sha": "99bc625edee27cb0de2eef063c4f7bbe6b5526bf",
+  "repo_sha": "46c7ea0f88e495a5727b7b5d10eaf62020cb0e0e",
   "term": "2026-09"
 }
