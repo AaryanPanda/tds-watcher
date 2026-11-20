@@ -327,3 +327,42 @@ Diff — 2026-09/week-5/agent-failure-modes.md:
   -| **Step Multiplication** | Keeps trying forever ($p^N$ reliability crash) | Hard step budget (e.g. 15 max) + graceful escalation |
   +| **Step Multiplication** | Keeps trying forever (\(p^N\) reliability crash) | Hard step budget (e.g. 15 max) + graceful escalation |
 ```
+
+## TDS: ⏰ P2 (Project 2) deadline changed: Sun 13 Dec → Mon 21 Dec
+
+```
+📢 TDS 2026-09 update — Fri 20 Nov, 02:00 PM IST
+
+• ⏰ P2 (Project 2) deadline changed: Sun 13 Dec → Mon 21 Dec
+• 📅 P2 (Project 2) release date changed: Fri 06 Nov → Wed 02 Dec
+• ⏰ GA6 (Week-6) deadline changed: Mon 23 Nov → Mon 07 Dec
+• 📅 GA6 (Week-6) release date changed: Wed 11 Nov → Wed 25 Nov
+• ⏰ GA7 (Week-7) deadline changed: Mon 30 Nov → Mon 14 Dec
+• 📅 GA7 (Week-7) release date changed: Wed 18 Nov → Wed 02 Dec
+• ⏰ GA8 (Week-8) deadline changed: Mon 07 Dec → Mon 21 Dec
+• 📅 GA8 (Week-8) release date changed: Wed 25 Nov → Wed 09 Dec
+• ✏️ Course page changed: https://tds.s-anand.net/2026-09/
+
+Commits:
+  2026-11-20 13:46  Sep26 P2, GA6, GA7, GA8 date correct  (d8feee3)
+
+Diff — 2026-09/README.md:
+  -| Project 2                                                | **P2**         |    20% | Fri 06 Nov          | Sun 13 Dec          |
+  -| Week-6                                                   | **GA6**        |      — | Wed 11 Nov          | Mon 23 Nov          |
+  -| Week-7                                                   | **GA7**        |      — | Wed 18 Nov          | Mon 30 Nov          |
+  -| Week-8                                                   | **GA8**        |      — | Wed 25 Nov          | Mon 07 Dec          |
+  +| Project 2                                                | **P2**         |    20% | Wed 02 Dec          | Mon 21 Dec          |
+  +| Week-6                                                   | **GA6**        |      — | Wed 25 Nov          | Mon 07 Dec          |
+  +| Week-7                                                   | **GA7**        |      — | Wed 02 Dec          | Mon 14 Dec          |
+  +| Week-8                                                   | **GA8**        |      — | Wed 09 Dec          | Mon 21 Dec          |
+
+Diff — https://tds.s-anand.net/2026-09/:
+  -Project 2 | P2 | 20% | Fri 06 Nov | Sun 13 Dec |
+  -Week-6 | GA6 | — | Wed 11 Nov | Mon 23 Nov |
+  -Week-7 | GA7 | — | Wed 18 Nov | Mon 30 Nov |
+  -Week-8 | GA8 | — | Wed 25 Nov | Mon 07 Dec |
+  +Project 2 | P2 | 20% | Wed 02 Dec | Mon 21 Dec |
+  +Week-6 | GA6 | — | Wed 25 Nov | Mon 07 Dec |
+  +Week-7 | GA7 | — | Wed 02 Dec | Mon 14 Dec |
+  +Week-8 | GA8 | — | Wed 09 Dec | Mon 21 Dec |
+```

@@ -50,23 +50,23 @@
   },
   "GA6": {
     "content": "Week-6",
-    "due": "Mon 23 Nov",
+    "due": "Mon 07 Dec",
     "link": "",
-    "release": "Wed 11 Nov",
+    "release": "Wed 25 Nov",
     "weight": "—"
   },
   "GA7": {
     "content": "Week-7",
-    "due": "Mon 30 Nov",
+    "due": "Mon 14 Dec",
     "link": "",
-    "release": "Wed 18 Nov",
+    "release": "Wed 02 Dec",
     "weight": "—"
   },
   "GA8": {
     "content": "Week-8",
-    "due": "Mon 07 Dec",
+    "due": "Mon 21 Dec",
     "link": "",
-    "release": "Wed 25 Nov",
+    "release": "Wed 09 Dec",
     "weight": "—"
   },
   "P1": {
@@ -78,9 +78,9 @@
   },
   "P2": {
     "content": "Project 2",
-    "due": "Sun 13 Dec",
+    "due": "Mon 21 Dec",
     "link": "",
-    "release": "Fri 06 Nov",
+    "release": "Wed 02 Dec",
     "weight": "20%"
   },
   "ROE": {
